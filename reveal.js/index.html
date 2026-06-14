@@ -135,7 +135,7 @@
 <body>
     <div class="reveal">
         <div class="slides">
-            
+
             <section>
                 <h1>From Spaghetti to Scalable</h1>
                 <p>Simple rewrites with DDD and Go</p>
@@ -1092,6 +1092,7 @@
                 </section>
             </section>
             
+            <!-- What made the difference? -->
             <section>
                 <section class="success-case">
                     <p class="cue success">Success factors</p>
@@ -1130,6 +1131,7 @@
                 </section>
             </section>
             
+            <!-- The simple rewrite loop -->
             <section>
                 <h2>The simple rewrite loop</h2>
                 <div class="loop">
@@ -1143,8 +1145,149 @@
                 </div>
             </section>
             
+            <!-- Fitness Functions -->
             <section>
+                <section>
+                    <h2>Fitness Functions</h2>
+                    <p>Automated checks that keep the architecture honest as the system evolves.</p>
+                </section>
+                <section>
+                    <blockquote>
+                        "An architectural fitness function provides an objective integrity assessment of some architectural characteristic(s)."
+                        <br /><small>— Building Evolutionary Architectures, Ford, Parsons &amp; Kua</small>
+                    </blockquote>
+                    <p>TDD extended from <strong>code quality</strong> to <strong>architectural quality</strong>.</p>
+                </section>
+                <section>
+                    <h3>Success factors need enforcement</h3>
+                    <p>The patterns we saw don't survive on good intentions alone.</p>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Success factor</th>
+                                <th>Fitness function</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Always in production, continuous feedback</td>
+                                <td>Shadow diff error rate &lt; 0.1% in production</td>
+                            </tr>
+                            <tr>
+                                <td>Each step independently reversible</td>
+                                <td>Error rate gate: canary stays below threshold before next ramp</td>
+                            </tr>
+                            <tr>
+                                <td>Reliability testing from day one</td>
+                                <td>Domain layer branch coverage &ge; 90% on every PR</td>
+                            </tr>
+                            <tr>
+                                <td>Boundary contracts maintained over time</td>
+                                <td>Structural test: domain has no imports from infrastructure</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h3>Categories</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Dimension</th>
+                                <th>Options</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Scope</strong></td>
+                                <td>Atomic / Holistic</td>
+                                <td>Single: cyclomatic complexity &mdash; Combined: security + latency together</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trigger</strong></td>
+                                <td>On deploy / Continual</td>
+                                <td>CI gate &mdash; Production canary monitor</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Result</strong></td>
+                                <td>Static / Dynamic</td>
+                                <td>Pass/fail &mdash; Threshold that scales with load</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Execution</strong></td>
+                                <td>Automated / Manual</td>
+                                <td>Pipeline check &mdash; Regulatory audit</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h3>Structural &mdash; enforce dependency direction</h3>
+                    <p>The domain must not know about infrastructure.</p>
+                    <pre><code class="language-go">// architecture_test.go — runs in CI on every PR
+func TestDomainIsolation(t *testing.T) {
+    cfg := &packages.Config{Mode: packages.NeedImports}
+    pkgs, _ := packages.Load(cfg, "./internal/lending/domain/...")
 
+    for _, pkg := range pkgs {
+        for imp := range pkg.Imports {
+            if strings.Contains(imp, "/infrastructure/") {
+                t.Errorf("%s imports infra — dependency direction violated", pkg.ID)
+            }
+        }
+    }
+}</code></pre>
+                    <p><small>Boundary violations are caught before they merge, not discovered months later.</small></p>
+                </section>
+                <section>
+                    <h3>Operational examples</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Characteristic</th>
+                                <th>Fitness function</th>
+                                <th>Trigger</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Performance</td>
+                                <td>p99 &lt; 100 ms under 2&times; normal load</td>
+                                <td>CI / pre-deploy</td>
+                            </tr>
+                            <tr>
+                                <td>Observability</td>
+                                <td>Every HTTP response carries a trace ID</td>
+                                <td>Integration test</td>
+                            </tr>
+                            <tr>
+                                <td>Security</td>
+                                <td>No known CVEs in direct dependencies</td>
+                                <td>CI on every push</td>
+                            </tr>
+                            <tr>
+                                <td>Shadow consistency</td>
+                                <td>New response matches legacy on sampled reads</td>
+                                <td>Continual (production)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h3>Where they run</h3>
+                    <div class="loop">
+                        <div class="loop-step"><strong>Commit</strong><br />Dependency direction, cyclomatic complexity, no PII in logs</div>
+                        <div class="loop-step"><strong>Build</strong><br />Coverage gate, CVE scan, license check</div>
+                        <div class="loop-step"><strong>Canary</strong><br />Error rate below threshold, p99 within budget</div>
+                        <div class="loop-step"><strong>Production</strong><br />Shadow diff rate, SLO burn, anomaly detection</div>
+                    </div>
+                    <p><small>Each gate is a fitness function. Together they replace manual architectural review at every ramp step.</small></p>
+                </section>
+            </section>
+
+            <!-- Why DDD simplify? -->
+            <section>
                 <section>
                     <h2>Why DDD simplify?</h2>
                 </section>
@@ -1167,14 +1310,79 @@
                 </section>
             </section>
 
+            <!-- How to DDD? -->
             <section>
                 <h2>How to DDD?</h2>
             </section>
 
+            <!-- Ubiquitous Language -->
             <section>
-                <h2>Ubiquitous Language</h2>
+                <section>
+                    <h2>Ubiquitous Language</h2>
+                </section>
+                <section>
+                    <h3>The Application</h3>
+                    <p>
+                        A public library manages a catalog of <strong>titles</strong>, each with one or more physical
+                        <strong>copies</strong>. A <strong>member</strong> borrows a copy, creating a
+                        <strong>loan</strong> with a <strong>due date</strong>. Members may <strong>extend</strong> an
+                        active loan or place a <strong>reservation</strong> on a title when no copies are available.
+                        A loan that passes its due date becomes <strong>overdue</strong> and may incur a
+                        <strong>fine</strong>.
+                    </p>
+                </section>
+                <section>
+                    <h3>Ubiquitous Language</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Term</th>
+                                <th>Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Member</strong></td>
+                                <td>A registered patron eligible to borrow copies</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Title</strong></td>
+                                <td>A work in the catalog (book, journal, etc.)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Copy</strong></td>
+                                <td>A physical instance of a title available for lending</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Loan</strong></td>
+                                <td>An active borrowing of a copy by a member</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Due Date</strong></td>
+                                <td>The date by which a borrowed copy must be returned</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Overdue</strong></td>
+                                <td>A loan that has passed its due date without return</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Extension</strong></td>
+                                <td>A request to extend the due date of an active loan</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reservation</strong></td>
+                                <td>A member's hold on a title when all copies are on loan</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fine</strong></td>
+                                <td>A charge applied to a member for an overdue or lost copy</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
             </section>
 
+            <!-- DDD - Discover &mdash; Event Storming -->
             <section>
                 <section>
                     <h2>DDD - Discover &mdash; Event Storming</h2>
@@ -1202,6 +1410,7 @@
                 </section>
             </section>
             
+            <!-- DDD - Domains, Sub-domains &amp; Bounded Contexts -->
             <section>
                 <section>
                     <h2>DDD - Domains, Sub-domains &amp; Bounded Contexts</h2>
@@ -1241,8 +1450,34 @@
                         </tbody>
                     </table>
                 </section>
+                <section>
+                    <h3>Model</h3>
+                    <p>A useful simplification &mdash; only what matters inside this context.</p>
+                    <div class="code-compare">
+                        <div>
+                            <p>Lending context cares about:</p>
+                            <pre><code class="language-go">type Loan struct {
+    ID       LoanID
+    Status   LoanStatus
+    CopyID   CopyID
+    MemberID MemberID
+    DueDate  DueDate
+}</code></pre>
+                        </div>
+                        <div>
+                            <p>Does not care about:</p>
+                            <ul>
+                                <li>Member avatar</li>
+                                <li>Book cover image</li>
+                                <li>Shelf location</li>
+                                <li>Acquisition source</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p><small>Those may matter in Catalog or Membership &mdash; not here.</small></p>
+                </section>
             </section>
-            
+
             <section>
                 <section>
                     <h2>DDD - Context Maps</h2>
@@ -1263,7 +1498,7 @@
                 </section>
             </section>
             
-            <section>
+            <section> <!-- DDD - Message Types --> 
                 <section>
                     <h2>DDD - Message Types</h2>
                     <p>Events from the workshop fall into three distinct roles that shape how the model is
@@ -1300,8 +1535,43 @@
                     <p><small>Commands and queries enter the domain from outside. Events flow out &mdash; or drive
                             consistency between aggregates.</small></p>
                 </section>
+                <section>
+                    <h3>Domain vs Integration Events</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Purpose</th>
+                                <th>Audience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Domain event</strong></td>
+                                <td>Capture a business fact</td>
+                                <td>Same bounded context</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Application event</strong></td>
+                                <td>Coordinate app behavior</td>
+                                <td>Application layer</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Integration event</strong></td>
+                                <td>Notify other systems</td>
+                                <td>Outside world</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pre><code class="language-text">loan.Return()
+    emits BookReturned           ← domain event
+Application saves Loan
+Handler reacts:
+    send overdue notice          ← application event
+    publish book.returned.v1     ← integration event</code></pre>
+                </section>
             </section>
-            
+
             <section>
                 <section>
                     <h2>DDD - Strategize</h2>
@@ -1363,6 +1633,131 @@
                     </div>
                     <p><small>Architecture is not DDD. DDD gives you the model; hexagonal gives you the wiring.
                             Dependencies always point inward.</small></p>
+                </section>
+                <section>
+                    <h3>Entity</h3>
+                    <p>An object with <strong>identity</strong>. Remains the same thing even as its attributes change.</p>
+                    <pre><code class="language-go">type Loan struct {
+    id     LoanID
+    status LoanStatus
+    copyID CopyID
+}</code></pre>
+                    <p>The loan moves through states:</p>
+                    <pre><code class="language-text">created → active → returned
+                       ↘ overdue</code></pre>
+                    <p><small>Still the same loan &mdash; same <code>LoanID</code>.</small></p>
+                </section>
+                <section>
+                    <h3>Value Object</h3>
+                    <p>Defined by its <strong>values</strong>, not identity. Immutable; validates on construction.</p>
+                    <pre><code class="language-go">type DueDate struct{ value time.Time }
+
+func NewDueDate(t time.Time) (DueDate, error) {
+    if t.IsZero() {
+        return DueDate{}, errors.New("due date is required")
+    }
+    if t.Before(time.Now()) {
+        return DueDate{}, errors.New("due date must be in the future")
+    }
+    return DueDate{value: t}, nil
+}</code></pre>
+                    <p><small><strong>Entity = who is it?</strong> &nbsp;|&nbsp; <strong>Value Object = what is it?</strong></small></p>
+                    <p><small>Good candidates: <code>LoanID</code>, <code>MemberID</code>, <code>DueDate</code>, <code>LoanPeriod</code></small></p>
+                </section>
+                <section>
+                    <h3>Aggregate</h3>
+                    <p>A <strong>consistency boundary</strong>. Business rules enforced through the aggregate root.</p>
+                    <div class="code-compare">
+                        <div>
+                            <p>Don&rsquo;t bypass the root:</p>
+                            <pre><code class="language-go">loan.Status = LoanStatusReturned</code></pre>
+                        </div>
+                        <div>
+                            <p>Let the root enforce invariants:</p>
+                            <pre><code class="language-go">err := loan.Return()</code></pre>
+                        </div>
+                    </div>
+                    <pre><code class="language-go">func (l *Loan) Return() error {
+    if l.status != LoanStatusActive {
+        return errors.New("only active loans can be returned")
+    }
+    l.status = LoanStatusReturned
+    l.recordEvent(BookReturned{LoanID: l.id})
+    return nil
+}</code></pre>
+                </section>
+                <section>
+                    <h3>Domain Service</h3>
+                    <p>Business logic that does not naturally belong to one entity or value object.</p>
+                    <pre><code class="language-go">type LoanEligibilityService struct {
+    policy LendingPolicy
+}
+
+func (s LoanEligibilityService) CheckEligibility(
+    member MemberSnapshot,
+    copy   CopySnapshot,
+) (EligibilityDecision, error) {
+    // member not blocked
+    // active loans within limit
+    // copy available
+    // policy allows it
+}</code></pre>
+                    <p><small>Speaks the business language. Not a generic <code>LoanManager</code> or <code>LoanHelper</code>.</small></p>
+                </section>
+                <section>
+                    <h3>Application Service</h3>
+                    <p>Coordinates a use case. No business rules &mdash; only load, call, save, publish.</p>
+                    <pre><code class="language-go">func (h BorrowBookHandler) Handle(ctx context.Context, cmd BorrowBook) error {
+    member, _ := h.members.Get(ctx, cmd.MemberID)
+    copy, _   := h.copies.Get(ctx, cmd.CopyID)
+
+    loan, err := member.BorrowCopy(copy, h.clock.Today())
+    if err != nil {
+        return err
+    }
+
+    if err := h.loans.Save(ctx, loan); err != nil {
+        return err
+    }
+
+    return h.events.Publish(ctx, loan.PullEvents()...)
+}</code></pre>
+                    <p><small><strong>Application service:</strong> what steps? &nbsp;|&nbsp; <strong>Domain:</strong> what rules?</small></p>
+                </section>
+                <section>
+                    <h3>Services at a glance</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Layer</th>
+                                <th>Library example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Domain service</td>
+                                <td>Domain</td>
+                                <td><code>LoanEligibilityService</code></td>
+                            </tr>
+                            <tr>
+                                <td>Application service</td>
+                                <td>Application</td>
+                                <td><code>BorrowBookHandler</code></td>
+                            </tr>
+                            <tr>
+                                <td>Infrastructure service</td>
+                                <td>Infrastructure</td>
+                                <td><code>PostgresLoanRepository</code></td>
+                            </tr>
+                            <tr>
+                                <td>External service</td>
+                                <td>Outside</td>
+                                <td>Email provider, legacy ILS</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><small>When someone says "service" &mdash; ask: which layer? Business rules, orchestration, or technical detail?</small></p>
                 </section>
             </section>
             </section>
