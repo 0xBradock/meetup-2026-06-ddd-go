@@ -135,6 +135,7 @@
 <body>
     <div class="reveal">
         <div class="slides">
+            
             <section>
                 <h1>From Spaghetti to Scalable</h1>
                 <p>Simple rewrites with DDD and Go</p>
@@ -144,6 +145,7 @@
                     <br /><small>— Kent Beck</small>
                 </blockquote>
             </section>
+
             <section class="intro-slide">
                 <div class="intro-photo" role="img" aria-label="Portrait photo"></div>
                 <div class="intro-content">
@@ -166,6 +168,7 @@
                     </div>
                 </div>
             </section>
+            
             <section>
                 <h2>Disclaimer</h2>
                 <div>
@@ -176,6 +179,7 @@
                     </ul>
                 </div>
             </section>
+            
             <section>
                 <section>
                     <h2>Simplicity</h2>
@@ -212,6 +216,7 @@
                     </p>
                 </section>
             </section>
+            
             <section>
                 <h2>Modernization</h2>
                 <p>
@@ -232,6 +237,7 @@
                     </div>
                 </div>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Port</p>
@@ -293,6 +299,7 @@
                     </table>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -367,6 +374,7 @@
                     </table>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -426,6 +434,7 @@
                     </table>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -493,6 +502,7 @@
                         de-risked the release.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -561,6 +571,7 @@
                     </h3>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Decomposition</p>
@@ -627,6 +638,7 @@
                     <h3>DDD subdomains gave Shopify clear ownership without the complexity of microservices.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Migration</p>
@@ -694,6 +706,7 @@
                     <h3>No cutover moment. Every phase is independently verifiable and reversible.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Port</p>
@@ -762,6 +775,7 @@
                     <h3>Scope discipline — not language choice — is what makes a large port finish.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -826,6 +840,7 @@
                     <h3>One endpoint at a time, with a live fallback at every step.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="failure-case">
                     <p class="cue failure">💥 Rewrite</p>
@@ -888,6 +903,7 @@
                     <h3>The big bang removed the feedback loop for too long.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="failure-case">
                     <p class="cue failure">💥 Rewrite</p>
@@ -948,6 +964,7 @@
                     <h3>A rewrite that misses the market is not modernization.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="failure-case">
                     <p class="cue failure">💥 Migration</p>
@@ -1010,6 +1027,7 @@
                     <h3>Never test against an incomplete system, and never do everything at once.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="failure-case">
                     <p class="cue failure">💥 Rewrite</p>
@@ -1073,6 +1091,7 @@
                     <h3>A new codebase does not repair the system that produced the old one.</h3>
                 </section>
             </section>
+            
             <section>
                 <section class="success-case">
                     <p class="cue success">Success factors</p>
@@ -1102,15 +1121,15 @@
                 </section>
                 <section>
                     <h2>What made the difference?</h2>
-                    <p>The top success patterns are one idea at three levels: <strong>never be in a position where you
-                            can't see what's happening or can't go back.</strong></p>
-                    <p>The top failure patterns share one enemy: <strong>time.</strong> Long coexistence, long tunnels,
-                        and underestimated parity all fail the same way — the project outlasts the team's ability to
-                        sustain it.</p>
-                    <p>The successful teams weren't smarter. They structured their work so that <strong>reality
-                            corrected them continuously</strong>, rather than all at once at the end.</p>
+                    <p>🚀<strong>Never be in a position where you can't see what's happening or can't go back.</strong>
+                    </p>
+                    <p>💥<strong>Time.</strong> Long coexistence, long tunnels, and underestimated parity all fail the
+                        same way — the project outlasts the team's ability to sustain it.</p>
+                    <br />
+                    <p><strong>Not smarter, continuously corrected by reality</strong></p>
                 </section>
             </section>
+            
             <section>
                 <h2>The simple rewrite loop</h2>
                 <div class="loop">
@@ -1123,24 +1142,44 @@
                     <div class="loop-step">Repeat</div>
                 </div>
             </section>
+            
             <section>
-                <h2>DDD helps us keep rewrites simple</h2>
-                <ul>
-                    <li>Align domain experts, devs and application.</li>
-                    <li><strong>Makes sense to the business</strong> business sf === good investment</li>
-                    <li>Teach the business about itself</li>
-                    <li></li>
-                    <li><strong>Define the business capability:</strong> use ubiquitous language and domain
-                        conversations to identify what must be preserved or improved.</li>
-                    <li><strong>Find domain seams:</strong> use bounded contexts, EventStorming, and consistency
-                        boundaries to choose a migration slice.</li>
-                </ul>
-                <p>Avoid heavy DDD content such as CQRS and event sourcing in the main path.</p>
+
+                <section>
+                    <h2>Why DDD simplify?</h2>
+                </section>
+                <section>
+                    <h2>Why DDD simplify?</h2>
+                    <ul class="compact">
+                        <li>Align domain experts, devs and application.</li>
+                        <li>Makes sense</li>
+                        <li>Teach the business about itself</li>
+                        <li>Centralize knowledge</li>
+                        <li>Design(how) is code </li>
+                    </ul>
+                    <p><strong>Business 💰</strong></p>
+
+                    <aside class="notes">Define the business capability: use ubiquitous language and domain
+                        conversations to identify what must be preserved or improved.
+                        Find domain seams:use bounded contexts, EventStorming, and consistency
+                        boundaries to choose a migration slice.
+                    </aside>
+                </section>
             </section>
+
+            <section>
+                <h2>How to DDD?</h2>
+            </section>
+
+            <section>
+                <h2>Ubiquitous Language</h2>
+            </section>
+
             <section>
                 <section>
                     <h2>DDD - Discover &mdash; Event Storming</h2>
-                    <p>A collaborative workshop: post domain events on a timeline, then work backwards to commands and
+                    <p>A collaborative workshop: post domain events on a timeline, then work backwards to commands
+                        and
                         aggregates.</p>
                 </section>
                 <section>
@@ -1162,6 +1201,7 @@
                             business actually cares about.</small></p>
                 </section>
             </section>
+            
             <section>
                 <section>
                     <h2>DDD - Domains, Sub-domains &amp; Bounded Contexts</h2>
@@ -1169,7 +1209,8 @@
                         <li><strong>Domain</strong> &mdash; the whole business problem space.</li>
                         <li><strong>Subdomain</strong> &mdash; a coherent area of expertise, discovered during event
                             storming.</li>
-                        <li><strong>Bounded Context</strong> &mdash; explicit boundary where a model is self-consistent.
+                        <li><strong>Bounded Context</strong> &mdash; explicit boundary where a model is
+                            self-consistent.
                             <em>Member</em> in Lending &ne; <em>Member</em> in Notifications.
                         </li>
                     </ul>
@@ -1201,6 +1242,7 @@
                     </table>
                 </section>
             </section>
+            
             <section>
                 <section>
                     <h2>DDD - Context Maps</h2>
@@ -1220,10 +1262,12 @@
                             corrupt your domain.</small></p>
                 </section>
             </section>
+            
             <section>
                 <section>
                     <h2>DDD - Message Types</h2>
-                    <p>Events from the workshop fall into three distinct roles that shape how the model is structured.
+                    <p>Events from the workshop fall into three distinct roles that shape how the model is
+                        structured.
                 </section>
                 <section>
                     </p>
@@ -1257,6 +1301,7 @@
                             consistency between aggregates.</small></p>
                 </section>
             </section>
+            
             <section>
                 <section>
                     <h2>DDD - Strategize</h2>
@@ -1297,10 +1342,12 @@
                             subdomains.</small></p>
                 </section>
             </section>
+            
             <section>
                 <section>
                     <h2>DDD - Code Architecture</h2>
-                    <p>The bounded context becomes the module. Hexagonal Architecture wires it to the outside world.</p>
+                    <p>The bounded context becomes the module. Hexagonal Architecture wires it to the outside world.
+                    </p>
                 </section>
                 <section>
                     <div class="mermaid">
@@ -1319,6 +1366,7 @@
                 </section>
             </section>
             </section>
+            
             <section>
                 <h2>The simplest target architecture</h2>
                 <ul>
@@ -1328,6 +1376,7 @@
                     <li>Do not start with microservices by default.</li>
                 </ul>
             </section>
+            
             <section>
                 <h2>Go helps the new slice stay simple</h2>
                 <ul>
@@ -1340,10 +1389,12 @@
                     </li>
                 </ul>
             </section>
+            
             <section>
                 <h2>Demo</h2>
                 <h2>👹</h2>
             </section>
+            
             <section>
                 <h2>BorrowBook</h2>
                 <p>A small library-loan slice that shows DDD as simplification.</p>
@@ -1382,6 +1433,7 @@
                     </div>
                 </div>
             </section>
+            
             <section>
                 <h2>Rewrites should be simple.</h2>
                 <p>Preserve the business capability. Reduce accidental entanglement. Keep feedback alive.</p>
