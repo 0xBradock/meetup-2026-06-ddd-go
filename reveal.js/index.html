@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>From Spaghetti to Scalable</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
+    <style>
+        .reveal .mermaid svg {
+            max-height: 65vh;
+        }
+
+        .reveal blockquote {
+            font-style: italic;
+            border-left: 4px solid #42affa;
+            padding-left: 1rem;
+        }
+
+        .reveal .tag {
+            display: inline-block;
+            background: #42affa22;
+            border: 1px solid #42affa55;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 0.6em;
+            margin: 2px;
+        }
+
+        .reveal .cue {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .reveal .success {
+            color: #69db7c;
+        }
+
+        .reveal .failure {
+            color: #ff6b6b;
+        }
+
+        .reveal section.success-case {
+            border-top: 0.35rem solid #69db7c;
+        }
+
+        .reveal section.failure-case {
+            border-top: 0.35rem solid #ff6b6b;
+        }
+
+        .reveal .outcome {
+            width: 100%;
+            font-size: 0.55em;
+        }
+
+        .reveal .outcome th {
+            color: #42affa;
+        }
+
+        .reveal .loop {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 0.4rem;
+            align-items: stretch;
+        }
+
+        .reveal .loop-step {
+            flex: 1 1 0;
+            min-width: 0;
+            border: 1px solid #42affa66;
+            border-radius: 0.4rem;
+            padding: 0.6rem;
+            font-size: 0.5em;
+            line-height: 1.15;
+            overflow-wrap: anywhere;
+            background: #42affa11;
+        }
+
+        .reveal .code-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .reveal .code-compare pre {
+            font-size: 0.42em;
+        }
+
+        .reveal .intro-slide {
+            padding: 0;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 50% 50%;
+            overflow: hidden;
+        }
+
+        .reveal .intro-photo {
+            height: 50%;
+            min-height: 320px;
+            width: 100%;
+            background: center center / cover no-repeat url('assets/your-photo.jpg');
+        }
+
+        .reveal .intro-content {
+            height: 42%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 2rem 1rem;
+            min-height: 0;
+        }
+
+        .reveal .intro-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .reveal .intro-content ul {
+            margin: 0;
+        }
+
+        .reveal ul.compact {
+            font-size: 0.65em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>From Spaghetti to Scalable</h1>
+                <p>Simple rewrites with DDD and Go</p>
+                <br />
+                <blockquote>
+                    "Make the change easy, then make the easy change."
+                    <br /><small>— Kent Beck</small>
+                </blockquote>
+            </section>
+            <section class="intro-slide">
+                <div class="intro-photo" role="img" aria-label="Portrait photo"></div>
+                <div class="intro-content">
+                    <div>
+                        <h3>About me</h3>
+                        <ul>
+                            <li>Adrenaline Junkie</li>
+                            <li>Lived in 🇧🇷 🇳🇿 🇫🇷</li>
+                            <li>❌ ⚽</li>
+                            <li>✅ 🍲</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>More about me</h3>
+                        <ul>
+                            <li>Exchange program</li>
+                            <li>3 Passports</li>
+                            <li>15 yoe</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Disclaimer</h2>
+                <div>
+                    <ul>
+                        <li>Not WiiSmile use case</li>
+                        <li>Opinions are my own</li>
+                        <!-- <li>TODO: Add others</li> -->
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <section>
+                    <h2>Simplicity</h2>
+                </section>
+                <section>
+                    <blockquote>
+                        "Simplicity is prerequisite for reliability."
+                        <br /><small>— Edsger W. Dijkstra</small>
+                    </blockquote>
+                </section>
+                <section>
+                    <blockquote>
+                        "There are two ways of constructing a software design: One way is to make it so simple that
+                        there are obviously no deficiencies and the other way is to make it so complicated that there
+                        are no obvious deficiencies."
+                        <br /><small>— C. A. R. Hoare</small>
+                    </blockquote>
+                </section>
+                <section>
+                    <blockquote>
+                        "Simple things are those which have one role."
+                        <br /><small>— Rich Hickey</small>
+                    </blockquote>
+                    <p><strong>Simple != easy.</strong></p>
+                </section>
+                <section>
+                    <h3>Working Definition</h3>
+                    <p>
+                        Simplicity is the disciplined removal of accidental entanglement so that a system
+                        can be understood, reasoned about, changed, and trusted.
+                    </p>
+                    <p>
+                        It is not minimalism, familiarity, or clever brevity. It is hard-won clarity.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <h2>Modernization</h2>
+                <p>
+                    Changing an existing system so it can keep serving the business under today's
+                    constraints.
+                </p>
+                <div class="code-compare">
+                    <div>
+                        <h3>Port</h3>
+                        <p>Same external behavior, new technical substrate.</p>
+                    </div>
+                    <div>
+                        <h3>Rewrite</h3>
+                        <p>
+                            Preserve the business capability, but change design boundaries and implementation
+                            to reduce accidental complexity.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Port</p>
+                    <h2>TypeScript Native</h2>
+                    <p>Same language and tooling experience, new native implementation substrate.</p>
+                    <small><a href="https://devblogs.microsoft.com/typescript/typescript-native-port/"
+                            target="_blank">devblogs.microsoft.com</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>Large TypeScript codebases need faster editor startup and type checking.</li>
+                        <li>The goal is better developer experience at scale.</li>
+                        <li>Microsoft reported about 10x faster builds, faster editor startup, and lower memory usage.
+                        </li>
+                        <li>The implementation target is Go.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Port the compiler and tools to native Go.</li>
+                        <li>Preview command-line type checking first.</li>
+                        <li>Move toward project builds and language service parity.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Behavior parity is the product promise.</li>
+                        <li>TypeScript 6 remains the JavaScript line.</li>
+                        <li>TypeScript 7 becomes native once mature enough.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Clear technical target: faster tooling.</td>
+                                <td>Compatibility and API parity must be protected.</td>
+                            </tr>
+                            <tr>
+                                <td>Reported order-of-magnitude speedups on large projects.</td>
+                                <td>Existing projects may remain on TypeScript 6 until TypeScript 7 fits their
+                                    constraints.</td>
+                            </tr>
+                            <tr>
+                                <td>Go supports the operational goal with native binaries and strong tooling.</td>
+                                <td>The port succeeds only if behavior remains familiar.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Rewrite</p>
+                    <h2>Reddit Comment Backend</h2>
+                    <p>Incremental migration of a high-throughput write path from Python to Go.</p>
+                    <small><a href="https://www.reddit.com/r/RedditEng/comments/1mbqto6/"
+                            target="_blank">reddit.com/r/RedditEng</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>Comments are a high-throughput, user-visible write path.</li>
+                        <li>The target was lower latency without user disruption.</li>
+                        <li>The new service was written in Go.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process: Tap Compare for Writes</h3>
+                    <div class="mermaid">
+                        sequenceDiagram
+                        actor Client
+                        participant Go as Go Service (new)
+                        participant Py as Python Service (legacy)
+                        participant PD as Production Stores<br />(Postgres + Memcached + Redis)
+                        participant SD as Sister Stores<br />(isolated — Go only)
+
+                        Client->>Go: Write request (small % of traffic)
+                        Go->>Py: Delegate real write
+                        Py->>PD: Write to production
+                        Py-->>Go: Response
+                        Go->>SD: Write independently (no production impact)
+                        Go->>Go: Compare production vs sister stores
+                        Note over Go: Log differences — never return new response to user
+                        Go-->>Client: Return legacy response
+                    </div>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Tap compare for write-path behavior validation.</li>
+                        <li>Sister datastores for write-path validation.</li>
+                        <li>The legacy response remained the user-facing truth during validation.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Zero user disruption during migration.</td>
+                                <td>Shadow validation does not remove the need for strong local tests.</td>
+                            </tr>
+                            <tr>
+                                <td>p99 write latency was reduced by about 50%.</td>
+                                <td>Raw Go queries exposed DB pressure hidden by the Python ORM.</td>
+                            </tr>
+                            <tr>
+                                <td>Sister datastores protected production writes.</td>
+                                <td>Race conditions created false tap-compare mismatches.</td>
+                            </tr>
+                            <tr>
+                                <td>Tap compare gave production confidence before cutover.</td>
+                                <td>Finding edge cases through production logs is expensive.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Rewrite</p>
+                    <h2>Turso Limbo</h2>
+                    <p>A SQLite-compatible rewrite in Rust, designed with reliability testing from day one.</p>
+                    <small><a href="https://turso.tech/blog/introducing-limbo-a-complete-rewrite-of-sqlite-in-rust"
+                            target="_blank">turso.tech/blog</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>libSQL started as a SQLite fork and reached changeability limits.</li>
+                        <li>Some key SQLite test infrastructure, such as TH3, is proprietary.</li>
+                        <li>C made invasive evolution riskier for the target changes.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Rewrite SQLite-compatible behavior in Rust.</li>
+                        <li>Design for async I/O from the beginning.</li>
+                        <li>Keep compatibility visible by verifying generated bytecode against SQLite.</li>
+                        <li>Regularly fuzz inputs to find edge cases.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Deterministic Simulation Testing built in from day one.</li>
+                        <li>Failures can be reproduced reliably.</li>
+                        <li>Antithesis fault injection found rare io_uring partial-write failures.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Reliability strategy was part of the architecture from day one.</td>
+                                <td>A full rewrite needs exceptional justification.</td>
+                            </tr>
+                            <tr>
+                                <td>DST made rare failures reproducible.</td>
+                                <td>Compatibility with SQLite behavior remains a large burden.</td>
+                            </tr>
+                            <tr>
+                                <td>Antithesis found failure modes internal tests may have missed.</td>
+                                <td>The testing investment is not optional; it is the price of the rewrite.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Rewrite</p>
+                    <h2>Slack Desktop</h2>
+                    <p>The Ship of Theseus: module-by-module replacement while continuously shipping.</p>
+                    <small><a href="https://slack.engineering/rebuilding-slack-on-the-desktop/"
+                            target="_blank">slack.engineering</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>The desktop app had accumulated years of technical debt.</li>
+                        <li>Performance and maintainability were degrading at scale.</li>
+                        <li>A big-bang rewrite would have frozen value delivery for years.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Replace one module at a time while shipping to users throughout.</li>
+                        <li>The first modern component — the emoji picker — shipped more than two years before the full
+                            rollout.</li>
+                        <li>No cutover moment: the app was always in production.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Continuous shipping meant continuous user feedback.</li>
+                        <li>Each module replacement was independently releasable and reversible.</li>
+                        <li>No dependency on a "when it's done" moment.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Users experienced continuous improvement, not a big reveal.</td>
+                                <td>Module boundaries must be identified carefully to allow independent replacement.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Risk was distributed across many small releases.</td>
+                                <td>Old and new code coexist for a long time — boundary contracts must be maintained.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Value delivered from day one, not after years of tunnel work.</td>
+                                <td>Team discipline on the new patterns must be sustained across the long transition.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="success-case">
+                    <p class="cue success">Success</p>
+                    <h3>Releasing incrementally delivered real value, maintained continuous improvement focus, and
+                        de-risked the release.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Rewrite</p>
+                    <h2>Dropbox Nucleus</h2>
+                    <p>A rare justified big-bang rewrite — when the data model is structurally broken.</p>
+                    <small><a href="https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine"
+                            target="_blank">dropbox.tech</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>The sync engine was built before file sharing existed.</li>
+                        <li>Files had no stable identifier preserved across moves — sharing could not be added
+                            incrementally.</li>
+                        <li>The data model was the problem; no amount of patching could fix a wrong foundation.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Four-year rewrite of the desktop sync engine from Python to Rust.</li>
+                        <li>A decision checklist applied before starting: incremental improvements exhausted, resources
+                            confirmed, slower feature velocity accepted.</li>
+                        <li>Clear technical goal: a new data model with stable file identifiers, not just a language
+                            swap.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism: The Checklist</h3>
+                    <ul>
+                        <li>Are incremental improvements truly exhausted?</li>
+                        <li>Do you have the resources and organisational health?</li>
+                        <li>Can the team accept slower feature development for the duration?</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rust became a force multiplier — described as one of the best decisions made.</td>
+                                <td>Four years is a long commitment; the business must be able to sustain it.</td>
+                            </tr>
+                            <tr>
+                                <td>The new data model correctly supported sharing from its foundation.</td>
+                                <td>A big-bang rewrite is only justified when the structure itself is wrong, not just
+                                    the implementation.</td>
+                            </tr>
+                            <tr>
+                                <td>The checklist gave the team an explicit go/no-go framework.</td>
+                                <td>Feature development was slower for the duration — this cost must be accepted up
+                                    front.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="success-case">
+                    <p class="cue success">Success</p>
+                    <h3>A big-bang rewrite is justified only when incremental improvement is structurally impossible.
+                    </h3>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Decomposition</p>
+                    <h2>Shopify Monolith</h2>
+                    <p>DDD-guided decomposition into a modular monolith — not microservices.</p>
+                    <small><a href="https://shopify.engineering/shopify-monolith"
+                            target="_blank">shopify.engineering</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>The Rails monolith needed decomposition for developer velocity at scale.</li>
+                        <li>Microservices were the obvious choice but increased overall complexity considerably.</li>
+                        <li>Clear ownership boundaries were needed without distributing the system.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Use DDD subdomains to identify decomposition boundaries.</li>
+                        <li>Implement boundaries as Rails Engines within the existing monolith.</li>
+                        <li>Vision-guided approach: DDD first, then engineering implementation.</li>
+                        <li>37 components with public entrypoints established.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Modular monolith avoids the complexity of distributed systems.</li>
+                        <li>Explicit public entrypoints make cross-boundary coupling visible.</li>
+                        <li>Decomposition is incremental; the monolith stays deployable throughout.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>DDD subdomains gave teams clear ownership without distributed complexity.</td>
+                                <td>Vision-guided decomposition takes longer than spin-off — teams must accept that
+                                    timeline.</td>
+                            </tr>
+                            <tr>
+                                <td>Rails Engines kept the monolith deployable while partitioning accelerated.</td>
+                                <td>Complete boundary enforcement requires sustained discipline across a large developer
+                                    base.</td>
+                            </tr>
+                            <tr>
+                                <td>Explicit public entrypoints made accidental coupling visible.</td>
+                                <td>Boundaries evolve as the domain is better understood — 37 components is not the end
+                                    state.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="success-case">
+                    <p class="cue success">Success</p>
+                    <h3>DDD subdomains gave Shopify clear ownership without the complexity of microservices.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Migration</p>
+                    <h2>Stripe Online Migrations</h2>
+                    <p>Migrating hundreds of millions of records with no downtime window.</p>
+                    <small><a href="https://stripe.com/blog/online-migrations"
+                            target="_blank">stripe.com/blog</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>The Subscriptions data model needed structural changes at very large scale.</li>
+                        <li>A maintenance window was not an option — Stripe processes payments continuously.</li>
+                        <li>Data consistency must be guaranteed at every step of the migration.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process: Four-Phase Dual Write</h3>
+                    <div class="loop">
+                        <div class="loop-step"><strong>1. Dual write</strong><br />Write to both old and new tables
+                            simultaneously.</div>
+                        <div class="loop-step"><strong>2. Change read paths</strong><br />Switch all reads to the new
+                            table; old table still written.</div>
+                        <div class="loop-step"><strong>3. Change write paths</strong><br />Write exclusively to new
+                            table; stop writing old.</div>
+                        <div class="loop-step"><strong>4. Remove old data</strong><br />Delete old table once new is
+                            verified as sole source of truth.</div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Each phase is independently verifiable before proceeding to the next.</li>
+                        <li>Each phase is reversible — no single commit point.</li>
+                        <li>Consistency is maintained throughout: no moment where data exists only in one place.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hundreds of millions of objects migrated with zero user impact.</td>
+                                <td>Each phase boundary requires careful verification before advancing.</td>
+                            </tr>
+                            <tr>
+                                <td>No maintenance window required — migration ran in production continuously.</td>
+                                <td>Dual-write adds write amplification; monitor DB load during phase 1.</td>
+                            </tr>
+                            <tr>
+                                <td>Each phase could be paused or rolled back independently.</td>
+                                <td>Schema changes may require additional coordination beyond the four phases.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="success-case">
+                    <p class="cue success">Success</p>
+                    <h3>No cutover moment. Every phase is independently verifiable and reversible.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Port</p>
+                    <h2>Khan Academy — Goliath</h2>
+                    <p>One million lines of Python 2 migrated to Go, without scope creep.</p>
+                    <small><a
+                            href="https://blog.khanacademy.org/beating-the-odds-khan-academys-successful-monolith%E2%86%92services-rewrite/"
+                            target="_blank">blog.khanacademy.org</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>Python 2 reached end of life — ~1 million lines needed to move.</li>
+                        <li>The rewrite was also an opportunity to move toward a services architecture.</li>
+                        <li>Scope creep was the primary risk: rewrites that add features while porting rarely finish.
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Direct port from Python to Go — no new features during migration.</li>
+                        <li>A single decision-maker controlled whether any net-new Python features were allowed.</li>
+                        <li>Project ran from early 2020; reached 95% traffic on the new backend by August 2021.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Strict "direct port only" policy enforced by a single gatekeeper.</li>
+                        <li>Incremental traffic ramp: new backend handled progressively more traffic before full
+                            cutover.</li>
+                        <li>Scope discipline: no business logic changes mixed with the port.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>The port finished — scope control was the deciding factor.</td>
+                                <td>A million-line port requires sustained organisational commitment across 18+ months.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Go's static tooling and explicit error handling made the new codebase easier to
+                                    reason about.</td>
+                                <td>Mixing port work with new feature development is a reliable way to never finish.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>95% of traffic shifted before any public announcement.</td>
+                                <td>Incremental cutover requires parallel infrastructure costs during transition.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="success-case">
+                    <p class="cue success">Success</p>
+                    <h3>Scope discipline — not language choice — is what makes a large port finish.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">🚀 Rewrite</p>
+                    <h2>Airbnb SOA Migration</h2>
+                    <p>A Rails monolith decomposed into Java services, one endpoint at a time.</p>
+                    <small><a href="https://www.infoq.com/presentations/airbnb-soa-migration"
+                            target="_blank">infoq.com</a></small>
+                </section>
+                <section>
+                    <h3>Why Modernize?</h3>
+                    <ul>
+                        <li>The Rails monolith could not scale to Airbnb's deployment pace.</li>
+                        <li>Hour-long deploy cycles blocked the team from shipping continuously.</li>
+                        <li>Different parts of the system had different scaling and ownership needs.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Extract one endpoint at a time from the monolith into a Java service.</li>
+                        <li>Use dual-read/dual-write with configurable feature gates per endpoint.</li>
+                        <li>Start at 1% traffic comparison, ramp to 100% before cutover.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Feature gates allow per-endpoint rollback without a full deployment.</li>
+                        <li>Traffic comparison at every ramp step catches behavioral divergence early.</li>
+                        <li>Endpoint-by-endpoint extraction keeps the monolith as a live fallback.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What worked</th>
+                                <th>What to watch</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Deploy frequency grew to around 10,000 deploys per week.</td>
+                                <td>Distributed systems add latency and operational complexity — monitor carefully.</td>
+                            </tr>
+                            <tr>
+                                <td>Search page became approximately 3× faster; home description page over 10× faster.
+                                </td>
+                                <td>Dual-write at scale requires careful consistency discipline across both paths.</td>
+                            </tr>
+                            <tr>
+                                <td>Incremental extraction kept the monolith serving users throughout.</td>
+                                <td>Service proliferation requires investment in platform and observability tooling.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="success-case">
+                    <p class="cue success">Success</p>
+                    <h3>One endpoint at a time, with a live fallback at every step.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="failure-case">
+                    <p class="cue failure">💥 Rewrite</p>
+                    <h2>Netscape</h2>
+                    <p>The canonical big-bang rewrite warning.</p>
+                    <small><a href="https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/"
+                            target="_blank">joelonsoftware.com</a></small>
+                </section>
+                <section>
+                    <h3>Summary</h3>
+                    <ul>
+                        <li>Rewritten from scratch</li>
+                        <li>three-year competitive gap</li>
+                        <li>old behavior rediscovered late</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Stop improving the old product</li>
+                        <li>build the replacement in a tunnel</li>
+                        <li>ship when parity feels close</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>No continuous user feedback loop</li>
+                        <li>inadequate testing in the referenced story</li>
+                        <li>hidden behavior discarded</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What was attempted</th>
+                                <th>What failed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Start fresh</td>
+                                <td>Lost years of market feedback</td>
+                            </tr>
+                            <tr>
+                                <td>Replace old code wholesale</td>
+                                <td>Discarded hard-won edge cases</td>
+                            </tr>
+                            <tr>
+                                <td>Ship the new version after the tunnel</td>
+                                <td>Users saw bugs and missing platform conventions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="failure-case">
+                    <p class="cue failure">Failure</p>
+                    <h3>The big bang removed the feedback loop for too long.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="failure-case">
+                    <p class="cue failure">💥 Rewrite</p>
+                    <h2>Borland</h2>
+                    <p>Feature parity is a trap.</p>
+                    <small><a href="https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/"
+                            target="_blank">joelonsoftware.com</a></small>
+                </section>
+                <section>
+                    <h3>Summary</h3>
+                    <p>
+                        Joel Spolsky pointed to dBase-for-Windows and Quattro Pro as brief examples
+                        of rewrites where parity and market timing overwhelmed the modernization story.
+                    </p>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Rewrite large products</li>
+                        <li>underestimate parity</li>
+                        <li>compete while not shipping enough value</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>No visible incremental replacement path in the cautionary story</li>
+                        <li>scope and timing risk dominated</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What was attempted</th>
+                                <th>What failed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Create a Windows-era replacement</td>
+                                <td>Microsoft Access captured the market window</td>
+                            </tr>
+                            <tr>
+                                <td>Rewrite Quattro Pro from scratch</td>
+                                <td>The rewritten product surprised users with how few features it had</td>
+                            </tr>
+                            <tr>
+                                <td>Treat parity as implementation detail</td>
+                                <td>Parity became the project</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="failure-case">
+                    <p class="cue failure">Failure</p>
+                    <h3>A rewrite that misses the market is not modernization.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="failure-case">
+                    <p class="cue failure">💥 Migration</p>
+                    <h2>TSB Bank</h2>
+                    <p>A big-bang data migration that locked out 1.9 million customers.</p>
+                    <small><a href="https://icedq.com/resources/case-studies/tsb-bank-data-migration-failure"
+                            target="_blank">icedq.com</a></small>
+                </section>
+                <section>
+                    <h3>Summary</h3>
+                    <ul>
+                        <li>April 2018: 5 million customers migrated to a new platform in a single weekend cutover.</li>
+                        <li>1.9 million customers could not view their accounts after go-live.</li>
+                        <li>The team simultaneously upgraded the platform version and migrated the data.</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Full cutover in a single maintenance window</li>
+                        <li>platform upgrade and data migration combined into one event</li>
+                        <li>testing ran against an incomplete system</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>No staged rollout or incremental ramp</li>
+                        <li>no fallback path once cutover began</li>
+                        <li>testing was incomplete because the platform was still being developed during QA</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What was attempted</th>
+                                <th>What failed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Migrate all customers in one weekend</td>
+                                <td>1.9 million customers locked out; some for weeks</td>
+                            </tr>
+                            <tr>
+                                <td>Upgrade platform and migrate data simultaneously</td>
+                                <td>Missing data scenarios in production that tests never exercised</td>
+                            </tr>
+                            <tr>
+                                <td>Complete QA before go-live</td>
+                                <td>Testing against an incomplete platform left unknown gaps</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="failure-case">
+                    <p class="cue failure">Failure</p>
+                    <h3>Never test against an incomplete system, and never do everything at once.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="failure-case">
+                    <p class="cue failure">💥 Rewrite</p>
+                    <h2>Same team, same mess</h2>
+                    <p>A new codebase is not a new operating model.</p>
+                    <small><a href="https://daedtech.com/the-myth-of-the-software-rewrite/"
+                            target="_blank">daedtech.com</a></small>
+                </section>
+                <section>
+                    <h3>Summary</h3>
+                    <p>
+                        DaedTech's critique: the group created the mess, so the group has to clean
+                        it. A rewrite does not remove the habits that produced the old system.
+                    </p>
+                </section>
+                <section>
+                    <h3>Process</h3>
+                    <ul>
+                        <li>Same deadlines</li>
+                        <li>same shortcuts</li>
+                        <li>same lack of tests</li>
+                        <li>new repository</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Safety Mechanism</h3>
+                    <ul>
+                        <li>Change team habits</li>
+                        <li>add characterization tests</li>
+                        <li>make debt work explicit</li>
+                        <li>keep refactoring continuous</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Outcome</h3>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>What was attempted</th>
+                                <th>What failed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Escape the old codebase</td>
+                                <td>The causes of complexity remained</td>
+                            </tr>
+                            <tr>
+                                <td>Promise to do it right this time</td>
+                                <td>Same pressures recreated the mess</td>
+                            </tr>
+                            <tr>
+                                <td>Treat rewrite as reset button</td>
+                                <td>No sustained test and refactoring discipline</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="failure-case">
+                    <p class="cue failure">Failure</p>
+                    <h3>A new codebase does not repair the system that produced the old one.</h3>
+                </section>
+            </section>
+            <section>
+                <section class="success-case">
+                    <p class="cue success">Success factors</p>
+                    <h2>What made the difference?</h2>
+                    <ul class="compact">
+                        <li>77% — No tunnel — always in production, continuous feedback from users</li>
+                        <li>54% — Each step was independently reversible before the next began</li>
+                        <li>38% — Shadow validation kept the legacy response authoritative during migration</li>
+                        <li>38% — A go/no-go checklist before committing to a big-bang rewrite</li>
+                        <li>31% — Reliability testing designed in from day one, not bolted on later</li>
+                        <li>31% — Scope controlled by a gatekeeper; port and new features never mixed</li>
+                        <li>8% — DDD subdomains gave clear ownership without distributing the system</li>
+                    </ul>
+                </section>
+                <section class="failure-case">
+                    <p class="cue failure">Failure factors</p>
+                    <h2>What made the difference?</h2>
+                    <ul class="compact">
+                        <li>46% — Long coexistence erodes boundary contracts without sustained discipline</li>
+                        <li>38% — Big-bang removed the user feedback loop for too long</li>
+                        <li>38% — Parity underestimated — scope crept until the market window closed</li>
+                        <li>38% — Compatibility burden is permanent, not a one-time cost</li>
+                        <li>23% — Combining too many changes in one event left no fallback path</li>
+                        <li>15% — New codebase, same habits — the rewrite did not fix what produced the mess</li>
+                        <li>15% — Service proliferation requires platform investment that is often skipped</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>What made the difference?</h2>
+                    <p>The top success patterns are one idea at three levels: <strong>never be in a position where you
+                            can't see what's happening or can't go back.</strong></p>
+                    <p>The top failure patterns share one enemy: <strong>time.</strong> Long coexistence, long tunnels,
+                        and underestimated parity all fail the same way — the project outlasts the team's ability to
+                        sustain it.</p>
+                    <p>The successful teams weren't smarter. They structured their work so that <strong>reality
+                            corrected them continuously</strong>, rather than all at once at the end.</p>
+                </section>
+            </section>
+            <section>
+                <h2>The simple rewrite loop</h2>
+                <div class="loop">
+                    <div class="loop-step">Define the business capability</div>
+                    <div class="loop-step">Pick the simplest target architecture</div>
+                    <div class="loop-step">Add characterization tests around current behavior</div>
+                    <div class="loop-step">Find domain seams</div>
+                    <div class="loop-step">Migrate one thin slice</div>
+                    <div class="loop-step">Measure</div>
+                    <div class="loop-step">Repeat</div>
+                </div>
+            </section>
+            <section>
+                <h2>DDD helps us keep rewrites simple</h2>
+                <ul>
+                    <li>Align domain experts, devs and application.</li>
+                    <li><strong>Makes sense to the business</strong> business sf === good investment</li>
+                    <li>Teach the business about itself</li>
+                    <li></li>
+                    <li><strong>Define the business capability:</strong> use ubiquitous language and domain
+                        conversations to identify what must be preserved or improved.</li>
+                    <li><strong>Find domain seams:</strong> use bounded contexts, EventStorming, and consistency
+                        boundaries to choose a migration slice.</li>
+                </ul>
+                <p>Avoid heavy DDD content such as CQRS and event sourcing in the main path.</p>
+            </section>
+            <section>
+                <section>
+                    <h2>DDD - Discover &mdash; Event Storming</h2>
+                    <p>A collaborative workshop: post domain events on a timeline, then work backwards to commands and
+                        aggregates.</p>
+                </section>
+                <section>
+                    <div class="mermaid">
+                        graph LR
+                        C1[BorrowBook] --> E1[BookBorrowed]
+                        C2[ExtendLoan] --> E2[LoanExtended]
+                        C3[ReturnBook] --> E3[BookReturned]
+                        C3 --> E4[LoanOverdue]
+                        C4[ReserveBook] --> E5[BookReserved]
+
+                        style E1 fill:#f90,color:#000
+                        style E2 fill:#f90,color:#000
+                        style E3 fill:#f90,color:#000
+                        style E4 fill:#f90,color:#000
+                        style E5 fill:#f90,color:#000
+                    </div>
+                    <p><small>Orange = domain event. Blue = command. Start with events &mdash; they surface what the
+                            business actually cares about.</small></p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>DDD - Domains, Sub-domains &amp; Bounded Contexts</h2>
+                    <ul>
+                        <li><strong>Domain</strong> &mdash; the whole business problem space.</li>
+                        <li><strong>Subdomain</strong> &mdash; a coherent area of expertise, discovered during event
+                            storming.</li>
+                        <li><strong>Bounded Context</strong> &mdash; explicit boundary where a model is self-consistent.
+                            <em>Member</em> in Lending &ne; <em>Member</em> in Notifications.
+                        </li>
+                    </ul>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Bounded Context</th>
+                                <th>Owns</th>
+                                <th>Language sample</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lending</td>
+                                <td>Loan, Copy, Member</td>
+                                <td>borrow, extend, overdue</td>
+                            </tr>
+                            <tr>
+                                <td>Catalog</td>
+                                <td>Title, Edition, Copy</td>
+                                <td>acquire, catalog, withdraw</td>
+                            </tr>
+                            <tr>
+                                <td>Notifications</td>
+                                <td>Recipient, Message</td>
+                                <td>notify, reminder, channel</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>DDD - Context Maps</h2>
+                    <p>A context map makes inter-context coupling explicit and names the integration pattern.</p>
+                </section>
+                <section>
+                    <div class="mermaid">
+                        graph LR
+                        Lending -->|"Customer / Supplier"| Catalog
+                        Lending -->|"Conformist"| Notifications
+                        Lending -->|"ACL"| Legacy["Legacy ILS"]
+
+                        style Lending fill:#1a6,color:#fff
+                        style Legacy fill:#666,color:#fff
+                    </div>
+                    <p><small>ACL = Anti-Corruption Layer: translates a foreign model at the boundary before it can
+                            corrupt your domain.</small></p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>DDD - Message Types</h2>
+                    <p>Events from the workshop fall into three distinct roles that shape how the model is structured.
+                </section>
+                <section>
+                    </p>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>What it is</th>
+                                <th>BorrowBook example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Command</strong></td>
+                                <td>An intent. May be rejected.</td>
+                                <td><code>BorrowBook{MemberID, CopyID}</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Event</strong></td>
+                                <td>A fact. Immutable, past tense.</td>
+                                <td><code>BookBorrowed{LoanID, At time.Time}</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Query</strong></td>
+                                <td>A read request. No side effects.</td>
+                                <td><code>ActiveLoansByMember{MemberID}</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><small>Commands and queries enter the domain from outside. Events flow out &mdash; or drive
+                            consistency between aggregates.</small></p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>DDD - Strategize</h2>
+                    <p>Classify subdomains to decide where to invest design effort.</p>
+                </section>
+                <section>
+                    <table class="outcome">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>What it means</th>
+                                <th>Investment</th>
+                                <th>BorrowBook</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Core</strong></td>
+                                <td>Your competitive advantage</td>
+                                <td>Own it. Design with care.</td>
+                                <td>Lending</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Supporting</strong></td>
+                                <td>Needed but not differentiating</td>
+                                <td>Build simply or buy.</td>
+                                <td>Catalog</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Generic</strong></td>
+                                <td>Commodity</td>
+                                <td>Buy or use open source.</td>
+                                <td>Notifications</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><small>DDD investment follows the core domain. Don't apply heavy tactical patterns to generic
+                            subdomains.</small></p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>DDD - Code Architecture</h2>
+                    <p>The bounded context becomes the module. Hexagonal Architecture wires it to the outside world.</p>
+                </section>
+                <section>
+                    <div class="mermaid">
+                        graph TD
+                        HTTP["HTTP: BorrowBook command"] --> App["Application: BorrowBookHandler"]
+                        App --> Dom["Domain: Loan, Member, Copy, DueDate"]
+                        App --> Port["LoanRepository port"]
+                        Port --> DB["DB Adapter"]
+                        Dom --> Event["BookBorrowed event"]
+
+                        style Dom fill:#1a6,color:#fff
+                        style App fill:#17a,color:#fff
+                    </div>
+                    <p><small>Architecture is not DDD. DDD gives you the model; hexagonal gives you the wiring.
+                            Dependencies always point inward.</small></p>
+                </section>
+            </section>
+            </section>
+            <section>
+                <h2>The simplest target architecture</h2>
+                <ul>
+                    <li>Start with a domain-oriented modular monolith.</li>
+                    <li>Deploy together until splitting is proven necessary.</li>
+                    <li>Evolve toward 4-12 coarse services with a simple template when separation pays for itself.</li>
+                    <li>Do not start with microservices by default.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Go helps the new slice stay simple</h2>
+                <ul>
+                    <li>DDD helps us choose the right slice.</li>
+                    <li>Go helps keep the new slice operationally simple.</li>
+                    <li>Small language surface and strong standard library.</li>
+                    <li>Standard tooling, static binaries, and fast builds.</li>
+                    <li>Straightforward deployment, clear concurrency, and Go 1 compatibility.</li>
+                    <li>Use Go for maintainability and operational simplicity, not as a universal performance answer.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Demo</h2>
+                <h2>👹</h2>
+            </section>
+            <section>
+                <h2>BorrowBook</h2>
+                <p>A small library-loan slice that shows DDD as simplification.</p>
+                <div class="code-compare">
+                    <div>
+                        <h3>Before</h3>
+                        <pre><code class="language-go">func BorrowBook(w http.ResponseWriter, r *http.Request) {
+                                member := loadMember(r.FormValue("member_id"))
+                                copy := loadCopy(r.FormValue("copy_id"))
+
+                                if member.Blocked || member.ActiveLoans >= 5 || copy.Borrowed {
+                                http.Error(w, "cannot borrow", http.StatusConflict)
+                                return
+                                }
+
+                                copy.Borrowed = true
+                                copy.BorrowedBy = member.ID
+                                copy.DueAt = time.Now().AddDate(0, 0, 21)
+                                saveCopy(copy)
+                                }</code></pre>
+                    </div>
+                    <div>
+                        <h3>After</h3>
+                        <pre><code class="language-go">func (h BorrowBookHandler) Handle(ctx context.Context, cmd
+                                BorrowBook) error {
+                                member := h.members.Get(ctx, cmd.MemberID)
+                                copy := h.copies.Get(ctx, cmd.CopyID)
+
+                                if err := member.CanBorrow(); err != nil {
+                                return err
+                                }
+
+                                loan := copy.MarkBorrowedBy(member.ID, h.clock.Today())
+                                return h.loans.Save(ctx, loan)
+                                }</code></pre>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Rewrites should be simple.</h2>
+                <p>Preserve the business capability. Reduce accidental entanglement. Keep feedback alive.</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="dist/plugin/notes.js"></script>
+    <script src="dist/plugin/markdown.js"></script>
+    <script src="dist/plugin/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        mermaid.initialize({startOnLoad: false, theme: 'dark', securityLevel: 'loose'});
+
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        }).then(() => {
+            mermaid.run({querySelector: '.mermaid'});
+        });
+    </script>
+</body>
+
+</html>
