@@ -21,7 +21,9 @@ const (
 	LoanStatusClosed   LoanStatus = "closed"
 )
 
-// DueDate is a value object. Validates on construction.
+// DueDate is a value object: it wraps time.Time with a domain-specific rule (must be
+// in the future). Two DueDates at the same instant are equal; neither needs an identity.
+// Validation at construction means the Loan aggregate can never hold an invalid due date.
 type DueDate struct {
 	value time.Time
 }
@@ -38,14 +40,18 @@ func NewDueDate(t time.Time) (DueDate, error) {
 
 func (d DueDate) Value() time.Time { return d.value }
 
-// Extension records a single loan extension.
+// Extension is a value object. It records an immutable fact — when a loan was extended
+// and what the new due date became. It has no identity of its own; two extensions at the
+// same instant with the same new due date are interchangeable. Stored inside Loan, never
+// addressed individually from outside the aggregate.
 type Extension struct {
 	ExtendedAt time.Time
 	NewDueDate DueDate
 }
 
-// Borrower is the Member seen from the borrowing perspective.
-// The Loan context never holds a full Member aggregate.
+// Borrower is a read model: the minimum projection of a Member the Loan context needs.
+// Importing the full Member aggregate would couple two bounded contexts at the model level,
+// leaking membership rules into borrowing logic. Only eligibility data crosses the boundary.
 type Borrower struct {
 	MemberID    MemberID
 	Name        string
@@ -63,13 +69,18 @@ func (b Borrower) CanBorrow() error {
 	return nil
 }
 
-// BorrowableCopy is the Copy seen from the borrowing perspective.
+// BorrowableCopy is a read model from the Catalog context. The Loan context only needs
+// to know whether a copy can be borrowed — bringing in the full Copy or Title aggregate
+// would violate the bounded context boundary and expose catalog internals to loan logic.
 type BorrowableCopy struct {
 	CopyID       CopyID
 	IsBorrowable bool
 }
 
-// Loan is the aggregate root.
+// Loan is the aggregate root — the consistency boundary for all borrowing rules.
+// All state changes (returning, extending, marking overdue) go through Loan methods so
+// invariants (e.g. only active loans can be returned or extended) are always enforced.
+// External code never mutates Loan fields directly.
 type Loan struct {
 	ID         LoanID
 	BorrowerID MemberID

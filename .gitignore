@@ -1,1 +1,14 @@
 .superpowers/
+.agents/
+.mcp.json
+.idea/
+.vscode/
+skills-lock.json
+.bash_profile
+.bashrc
+.zshrc
+.zprofile
+.profile
+.bash_profile
+.gitconfig
+.ripgreprc

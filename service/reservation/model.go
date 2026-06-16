@@ -21,7 +21,10 @@ const (
 	ReservationStatusCanceled       ReservationStatus = "canceled"
 )
 
-// ExpirationDate is a value object for the pickup deadline.
+// ExpirationDate is a value object for the pickup deadline. Like DueDate in the Loan
+// context, it validates at construction (must be in the future) so a Reservation can
+// never be in a ready-for-pickup state with an already-expired deadline. Two ExpirationDates
+// wrapping the same instant are equal; neither has an independent identity.
 type ExpirationDate struct {
 	value time.Time
 }
@@ -35,13 +38,19 @@ func NewExpirationDate(t time.Time) (ExpirationDate, error) {
 
 func (e ExpirationDate) Value() time.Time { return e.value }
 
-// ReservableTitle is the Title seen from the reservation perspective.
+// ReservableTitle is a read model from the Catalog context. The Reservation context only
+// needs to know whether a title can be reserved — importing the full Title aggregate would
+// couple the two contexts at the model level and force reservation logic to know about
+// catalog internals (copies, shelf locations, conditions, etc.).
 type ReservableTitle struct {
 	TitleID      TitleID
 	IsReservable bool
 }
 
-// Reservation is a member's hold on a title.
+// Reservation is an entity. It has its own identity (ReservationID) and moves through
+// a defined lifecycle (waiting → ready_for_pickup → fulfilled / canceled / expired).
+// It lives inside the ReservationQueue aggregate and is only accessed through it —
+// external code never holds a Reservation and calls Cancel or Fulfill on it directly.
 type Reservation struct {
 	ID             ReservationID
 	MemberID       MemberID
@@ -76,8 +85,10 @@ func (r *Reservation) Fulfill() error {
 	return nil
 }
 
-// ReservationQueue is the aggregate root.
-// It owns the ordered list of holds for a single title.
+// ReservationQueue is the aggregate root. It is the consistency boundary for all
+// queue operations on a single title: members always join at the back (Enqueue) and
+// the next eligible member is determined in arrival order (Next). These invariants are
+// enforced here so no external code can corrupt queue ordering or bypass priority.
 type ReservationQueue struct {
 	TitleID      TitleID
 	Reservations []Reservation

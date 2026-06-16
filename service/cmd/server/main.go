@@ -53,16 +53,7 @@ func Run(ctx context.Context, _ []string, getenv func(string) string, stdout io.
 	}
 	defer closePG()
 
-	mssqlRepos, closeMSSQL, err := db.NewMSSQL(ctx, cfg.MSSQLDriver, getenv)
-	if err != nil {
-		return fmt.Errorf("init mssql repository: %w", err)
-	}
-	defer closeMSSQL()
-
 	healthRepo := pgRepos.Health
-	if cfg.MSSQLDriver == "mssql" {
-		healthRepo = mssqlRepos.Health
-	}
 
 	// Sub-Domains
 	logger.Info("Creating service handlers")

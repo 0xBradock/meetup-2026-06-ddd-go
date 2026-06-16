@@ -56,6 +56,13 @@
             border-top: 0.35rem solid #ff6b6b;
         }
 
+        .reveal .hl {
+            text-decoration: underline;
+            text-decoration-color: #9c36b5;
+            text-decoration-thickness: 0.22em;
+            text-underline-offset: 0.1em;
+        }
+
         .reveal .outcome {
             width: 100%;
             font-size: 0.55em;
@@ -136,6 +143,11 @@
     <div class="reveal">
         <div class="slides">
 
+        <section data-background-image="assets/cover.png" data-background-size="cover"
+            data-background-position="center">
+        </section>
+
+            <!-- From Spaghetti to Scalable -->
             <section>
                 <h1>From Spaghetti to Scalable</h1>
                 <p>Simple rewrites with DDD and Go</p>
@@ -146,6 +158,19 @@
                 </blockquote>
             </section>
 
+            <!-- Disclaimer -->
+            <section>
+                <h2>Disclaimer</h2>
+                <div>
+                    <ul>
+                        <li>Opinions are my own</li>
+                        <li>Not WiiSmile use case</li>
+                        <li>Not DDD course</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- About Me -->
             <section class="intro-slide">
                 <div class="intro-photo" role="img" aria-label="Portrait photo"></div>
                 <div class="intro-content">
@@ -168,27 +193,56 @@
                     </div>
                 </div>
             </section>
-            
+
+            <!-- WiiSmile -->
             <section>
-                <h2>Disclaimer</h2>
-                <div>
-                    <ul>
-                        <li>Not WiiSmile use case</li>
-                        <li>Opinions are my own</li>
-                        <!-- <li>TODO: Add others</li> -->
-                    </ul>
-                </div>
+                <section>
+                    <h3>WiiSmile</h3>
+                </section>
+                <section data-background-image="assets/ws-1.png" data-background-size="cover"
+                    data-background-position="center">
+                    <aside class="notes">
+                        -   [départ] Depuis 25 ans: construit comme CE pour les TPE-PME
+                        -   [pendant le temps] Raison d’être
+                        -   [position] Leader Français sur ce marché
+                        -   [futur] Devenir l’interlocuteur RH
+                        -   [À l’IT] 40/230 IT (3 dernières années)
+                    </aside>
+                </section>
+                <section data-background-image="assets/ws-2.png" data-background-size="cover"
+                    data-background-position="center">
+                    <aside class="notes">
+                        - Nous accompagnons d’entreprises avec une plateforme d’avantages salariés et de services QVT.
+                        - Nos offres couvrent loisirs, vacances, sport, culture, achats, accompagnement social et bien-être.
+                    </aside>
+                </section>
             </section>
-            
+
             <section>
                 <section>
                     <h2>Simplicity</h2>
+                </section>
+                <section>
+                    <h3>🎁Simplicity</h3>
+                    <pre><code class="language-python" data-trim>
+def op(n):
+    if n is None:
+        return
+
+    n.left, n.right = n.right, n.left
+    op(n.left)
+    op(n.right)
+                    </code></pre>
                 </section>
                 <section>
                     <blockquote>
                         "Simplicity is prerequisite for reliability."
                         <br /><small>— Edsger W. Dijkstra</small>
                     </blockquote>
+                    <ul class="compact">
+                        <li>Invented the shortest-path algorithm (Dijkstra's algorithm)</li>
+                        <li>Pioneer of structured programming and formal software correctness</li>
+                    </ul>
                 </section>
                 <section>
                     <blockquote>
@@ -197,26 +251,34 @@
                         are no obvious deficiencies."
                         <br /><small>— C. A. R. Hoare</small>
                     </blockquote>
+                    <ul class="compact">
+                        <li>Invented Quicksort, one of the most widely used sorting algorithms</li>
+                        <li>Developed Hoare logic, the foundation of formal program verification</li>
+                    </ul>
                 </section>
                 <section>
                     <blockquote>
                         "Simple things are those which have one role."
                         <br /><small>— Rich Hickey</small>
                     </blockquote>
+                    <ul class="compact">
+                        <li>Created Clojure, a functional Lisp dialect for the JVM</li>
+                        <li>Author of the influential talk "Simple Made Easy"</li>
+                    </ul>
                     <p><strong>Simple != easy.</strong></p>
                 </section>
                 <section>
-                    <h3>Working Definition</h3>
+                    <h3>Simplicity Definition</h3>
                     <p>
                         Simplicity is the disciplined removal of accidental entanglement so that a system
                         can be understood, reasoned about, changed, and trusted.
                     </p>
-                    <p>
-                        It is not minimalism, familiarity, or clever brevity. It is hard-won clarity.
-                    </p>
+                    <p>It is not simplicity, minimalism, familiarity, or clever brevity.</p>
+                    <p>It is hard-won clarity.</p>
                 </section>
             </section>
-            
+
+            <!-- Modernization -->
             <section>
                 <h2>Modernization</h2>
                 <p>
@@ -226,22 +288,17 @@
                 <div class="code-compare">
                     <div>
                         <h3>Port</h3>
-                        <p>Same external behavior, new technical substrate.</p>
                     </div>
                     <div>
                         <h3>Rewrite</h3>
-                        <p>
-                            Preserve the business capability, but change design boundaries and implementation
-                            to reduce accidental complexity.
-                        </p>
                     </div>
                 </div>
             </section>
-            
+
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Port</p>
-                    <h2>TypeScript Native</h2>
+                    <h2>👉TypeScript Native</h2>
                     <p>Same language and tooling experience, new native implementation substrate.</p>
                     <small><a href="https://devblogs.microsoft.com/typescript/typescript-native-port/"
                             target="_blank">devblogs.microsoft.com</a></small>
@@ -299,11 +356,12 @@
                     </table>
                 </section>
             </section>
-            
+
+            <!-- Reddit Comment Backend -->
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
-                    <h2>Reddit Comment Backend</h2>
+                    <h2>👉Reddit Comment Backend</h2>
                     <p>Incremental migration of a high-throughput write path from Python to Go.</p>
                     <small><a href="https://www.reddit.com/r/RedditEng/comments/1mbqto6/"
                             target="_blank">reddit.com/r/RedditEng</a></small>
@@ -355,16 +413,16 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Zero user disruption during migration.</td>
+                                <td><span class="hl">Zero user disruption</span> during migration.</td>
                                 <td>Shadow validation does not remove the need for strong local tests.</td>
                             </tr>
                             <tr>
                                 <td>p99 write latency was reduced by about 50%.</td>
-                                <td>Raw Go queries exposed DB pressure hidden by the Python ORM.</td>
+                                <td>Raw Go queries exposed DB pressure <span class="hl">hidden by the Python ORM</span>.</td>
                             </tr>
                             <tr>
-                                <td>Sister datastores protected production writes.</td>
-                                <td>Race conditions created false tap-compare mismatches.</td>
+                                <td><span class="hl">Sister datastores</span> protected production writes.</td>
+                                <td><span class="hl">Race conditions</span> created false tap-compare mismatches.</td>
                             </tr>
                             <tr>
                                 <td>Tap compare gave production confidence before cutover.</td>
@@ -374,7 +432,7 @@
                     </table>
                 </section>
             </section>
-            
+
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -428,13 +486,13 @@
                             </tr>
                             <tr>
                                 <td>Antithesis found failure modes internal tests may have missed.</td>
-                                <td>The testing investment is not optional; it is the price of the rewrite.</td>
+                                <td><span class="hl">The testing investment is not optional; it is the price of the rewrite.</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
             </section>
-            
+
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -479,7 +537,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Users experienced continuous improvement, not a big reveal.</td>
+                                <td>Users experienced <span class="hl">continuous improvement</span>, not a big reveal.</td>
                                 <td>Module boundaries must be identified carefully to allow independent replacement.
                                 </td>
                             </tr>
@@ -489,8 +547,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Value delivered from day one, not after years of tunnel work.</td>
-                                <td>Team discipline on the new patterns must be sustained across the long transition.
+                                <td>Value <span class="hl">delivered from day one</span>, not after years of tunnel work.</td>
+                                <td>Team <span class="hl">discipline on the new patterns</span> must be sustained across the long transition.
                                 </td>
                             </tr>
                         </tbody>
@@ -502,7 +560,7 @@
                         de-risked the release.</h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -571,11 +629,11 @@
                     </h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Decomposition</p>
-                    <h2>Shopify Monolith</h2>
+                    <h2>👉Shopify Monolith</h2>
                     <p>DDD-guided decomposition into a modular monolith — not microservices.</p>
                     <small><a href="https://shopify.engineering/shopify-monolith"
                             target="_blank">shopify.engineering</a></small>
@@ -585,7 +643,7 @@
                     <ul>
                         <li>The Rails monolith needed decomposition for developer velocity at scale.</li>
                         <li>Microservices were the obvious choice but increased overall complexity considerably.</li>
-                        <li>Clear ownership boundaries were needed without distributing the system.</li>
+                        <li>Clear <span class="hl">ownership boundaries</span> were needed without distributing the system.</li>
                     </ul>
                 </section>
                 <section>
@@ -593,7 +651,7 @@
                     <ul>
                         <li>Use DDD subdomains to identify decomposition boundaries.</li>
                         <li>Implement boundaries as Rails Engines within the existing monolith.</li>
-                        <li>Vision-guided approach: DDD first, then engineering implementation.</li>
+                        <li>Vision-guided approach: <span class="hl">DDD first, then engineering implementation</span>.</li>
                         <li>37 components with public entrypoints established.</li>
                     </ul>
                 </section>
@@ -626,7 +684,7 @@
                                     base.</td>
                             </tr>
                             <tr>
-                                <td>Explicit public entrypoints made accidental coupling visible.</td>
+                                <td>Explicit public entrypoints made <span class="hl">accidental coupling visible</span>.</td>
                                 <td>Boundaries evolve as the domain is better understood — 37 components is not the end
                                     state.</td>
                             </tr>
@@ -638,11 +696,11 @@
                     <h3>DDD subdomains gave Shopify clear ownership without the complexity of microservices.</h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Migration</p>
-                    <h2>Stripe Online Migrations</h2>
+                    <h2>👉Stripe Online Migrations</h2>
                     <p>Migrating hundreds of millions of records with no downtime window.</p>
                     <small><a href="https://stripe.com/blog/online-migrations"
                             target="_blank">stripe.com/blog</a></small>
@@ -656,7 +714,7 @@
                     </ul>
                 </section>
                 <section>
-                    <h3>Process: Four-Phase Dual Write</h3>
+                    <h3>👉Process: Four-Phase Dual Write</h3>
                     <div class="loop">
                         <div class="loop-step"><strong>1. Dual write</strong><br />Write to both old and new tables
                             simultaneously.</div>
@@ -706,7 +764,7 @@
                     <h3>No cutover moment. Every phase is independently verifiable and reversible.</h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Port</p>
@@ -775,7 +833,7 @@
                     <h3>Scope discipline — not language choice — is what makes a large port finish.</h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="success-case">
                     <p class="cue success">🚀 Rewrite</p>
@@ -840,7 +898,7 @@
                     <h3>One endpoint at a time, with a live fallback at every step.</h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="failure-case">
                     <p class="cue failure">💥 Rewrite</p>
@@ -903,7 +961,7 @@
                     <h3>The big bang removed the feedback loop for too long.</h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="failure-case">
                     <p class="cue failure">💥 Rewrite</p>
@@ -964,11 +1022,11 @@
                     <h3>A rewrite that misses the market is not modernization.</h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="failure-case">
                     <p class="cue failure">💥 Migration</p>
-                    <h2>TSB Bank</h2>
+                    <h2>👉TSB Bank</h2>
                     <p>A big-bang data migration that locked out 1.9 million customers.</p>
                     <small><a href="https://icedq.com/resources/case-studies/tsb-bank-data-migration-failure"
                             target="_blank">icedq.com</a></small>
@@ -976,7 +1034,7 @@
                 <section>
                     <h3>Summary</h3>
                     <ul>
-                        <li>April 2018: 5 million customers migrated to a new platform in a single weekend cutover.</li>
+                        <li>April 2018: 5 million customers migrated to a new platform in a <span class="hl">single weekend cutover</span>.</li>
                         <li>1.9 million customers could not view their accounts after go-live.</li>
                         <li>The team simultaneously upgraded the platform version and migrated the data.</li>
                     </ul>
@@ -986,15 +1044,15 @@
                     <ul>
                         <li>Full cutover in a single maintenance window</li>
                         <li>platform upgrade and data migration combined into one event</li>
-                        <li>testing ran against an incomplete system</li>
+                        <li><span class="hl">testing ran against an incomplete system</span></li>
                     </ul>
                 </section>
                 <section>
                     <h3>Safety Mechanism</h3>
                     <ul>
-                        <li>No staged rollout or incremental ramp</li>
-                        <li>no fallback path once cutover began</li>
-                        <li>testing was incomplete because the platform was still being developed during QA</li>
+                        <li><span class="hl">No staged rollout</span> or incremental ramp</li>
+                        <li><span class="hl">no fallback</span> path once cutover began</li>
+                        <li><span class="hl">testing was incomplete</span> because the platform was still being developed during QA</li>
                     </ul>
                 </section>
                 <section>
@@ -1017,7 +1075,7 @@
                             </tr>
                             <tr>
                                 <td>Complete QA before go-live</td>
-                                <td>Testing against an incomplete platform left unknown gaps</td>
+                                <td><span class="hl">Testing against an incomplete platform</span> left unknown gaps</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1027,7 +1085,7 @@
                     <h3>Never test against an incomplete system, and never do everything at once.</h3>
                 </section>
             </section>
-            
+
             <section>
                 <section class="failure-case">
                     <p class="cue failure">💥 Rewrite</p>
@@ -1091,27 +1149,26 @@
                     <h3>A new codebase does not repair the system that produced the old one.</h3>
                 </section>
             </section>
-            
+
             <!-- What made the difference? -->
             <section>
                 <section class="success-case">
                     <p class="cue success">Success factors</p>
                     <h2>What made the difference?</h2>
                     <ul class="compact">
-                        <li>77% — No tunnel — always in production, continuous feedback from users</li>
-                        <li>54% — Each step was independently reversible before the next began</li>
-                        <li>38% — Shadow validation kept the legacy response authoritative during migration</li>
-                        <li>38% — A go/no-go checklist before committing to a big-bang rewrite</li>
-                        <li>31% — Reliability testing designed in from day one, not bolted on later</li>
-                        <li>31% — Scope controlled by a gatekeeper; port and new features never mixed</li>
-                        <li>8% — DDD subdomains gave clear ownership without distributing the system</li>
+                        <li>77% — No tunnel — <span class="hl">always in production</span>, continuous feedback from users</li>
+                        <li>54% — Each step was <span class="hl">independently reversible</span> before the next began</li>
+                        <li>38% — <span class="hl">Shadow validation</span> kept the legacy response authoritative during migration</li>
+                        <li>38% — A <span class="hl">go/no-go checklist</span> before committing to a big-bang rewrite</li>
+                        <li>31% — Reliability <span class="hl">testing</span> designed in from day one, not bolted on later</li>
+                        <li>31% — <span class="hl">Scope</span> controlled by a gatekeeper; port and new features never mixed</li>
                     </ul>
                 </section>
                 <section class="failure-case">
                     <p class="cue failure">Failure factors</p>
                     <h2>What made the difference?</h2>
                     <ul class="compact">
-                        <li>46% — Long coexistence erodes boundary contracts without sustained discipline</li>
+                        <li>46% — <span class="hl">Long coexistence</span> erodes boundary contracts without sustained discipline</li>
                         <li>38% — Big-bang removed the user feedback loop for too long</li>
                         <li>38% — Parity underestimated — scope crept until the market window closed</li>
                         <li>38% — Compatibility burden is permanent, not a one-time cost</li>
@@ -1130,21 +1187,7 @@
                     <p><strong>Not smarter, continuously corrected by reality</strong></p>
                 </section>
             </section>
-            
-            <!-- The simple rewrite loop -->
-            <section>
-                <h2>The simple rewrite loop</h2>
-                <div class="loop">
-                    <div class="loop-step">Define the business capability</div>
-                    <div class="loop-step">Pick the simplest target architecture</div>
-                    <div class="loop-step">Add characterization tests around current behavior</div>
-                    <div class="loop-step">Find domain seams</div>
-                    <div class="loop-step">Migrate one thin slice</div>
-                    <div class="loop-step">Measure</div>
-                    <div class="loop-step">Repeat</div>
-                </div>
-            </section>
-            
+
             <!-- Fitness Functions -->
             <section>
                 <section>
@@ -1153,7 +1196,8 @@
                 </section>
                 <section>
                     <blockquote>
-                        "An architectural fitness function provides an objective integrity assessment of some architectural characteristic(s)."
+                        "An architectural fitness function provides an objective integrity assessment of some
+                        architectural characteristic(s)."
                         <br /><small>— Building Evolutionary Architectures, Ford, Parsons &amp; Kua</small>
                     </blockquote>
                     <p>TDD extended from <strong>code quality</strong> to <strong>architectural quality</strong>.</p>
@@ -1277,12 +1321,16 @@ func TestDomainIsolation(t *testing.T) {
                 <section>
                     <h3>Where they run</h3>
                     <div class="loop">
-                        <div class="loop-step"><strong>Commit</strong><br />Dependency direction, cyclomatic complexity, no PII in logs</div>
+                        <div class="loop-step"><strong>Commit</strong><br />Dependency direction, cyclomatic complexity,
+                            no PII in logs</div>
                         <div class="loop-step"><strong>Build</strong><br />Coverage gate, CVE scan, license check</div>
-                        <div class="loop-step"><strong>Canary</strong><br />Error rate below threshold, p99 within budget</div>
-                        <div class="loop-step"><strong>Production</strong><br />Shadow diff rate, SLO burn, anomaly detection</div>
+                        <div class="loop-step"><strong>Canary</strong><br />Error rate below threshold, p99 within
+                            budget</div>
+                        <div class="loop-step"><strong>Production</strong><br />Shadow diff rate, SLO burn, anomaly
+                            detection</div>
                     </div>
-                    <p><small>Each gate is a fitness function. Together they replace manual architectural review at every ramp step.</small></p>
+                    <p><small>Each gate is a fitness function. Together they replace manual architectural review at
+                            every ramp step.</small></p>
                 </section>
             </section>
 
@@ -1313,12 +1361,16 @@ func TestDomainIsolation(t *testing.T) {
             <!-- How to DDD? -->
             <section>
                 <h2>How to DDD?</h2>
+                <p>Ubiquitous Language</p>
+                <p>Strategy</p>
+                <p>Tactic</p>
             </section>
 
             <!-- Ubiquitous Language -->
             <section>
                 <section>
-                    <h2>Ubiquitous Language</h2>
+                    <h2>DDD Ubiquitous Language</h2>
+                    <p>Common language</p>
                 </section>
                 <section>
                     <h3>The Application</h3>
@@ -1382,200 +1434,140 @@ func TestDomainIsolation(t *testing.T) {
                 </section>
             </section>
 
-            <!-- DDD - Discover &mdash; Event Storming -->
+            <!-- DDD - Problem Space -->
             <section>
                 <section>
-                    <h2>DDD - Discover &mdash; Event Storming</h2>
-                    <p>A collaborative workshop: post domain events on a timeline, then work backwards to commands
-                        and
-                        aggregates.</p>
+                    <h2>DDD Strategy</h2>
+                    <p>Business capabilities</p>
                 </section>
                 <section>
-                    <div class="mermaid">
-                        graph LR
-                        C1[BorrowBook] --> E1[BookBorrowed]
-                        C2[ExtendLoan] --> E2[LoanExtended]
-                        C3[ReturnBook] --> E3[BookReturned]
-                        C3 --> E4[LoanOverdue]
-                        C4[ReserveBook] --> E5[BookReserved]
+                    <h2>DDD - Problem Space</h2>
+                    <p>Domain - Library Circulation</p>
+                    <q>The domain is the overall business area.</q>
 
-                        style E1 fill:#f90,color:#000
-                        style E2 fill:#f90,color:#000
-                        style E3 fill:#f90,color:#000
-                        style E4 fill:#f90,color:#000
-                        style E5 fill:#f90,color:#000
-                    </div>
-                    <p><small>Orange = domain event. Blue = command. Start with events &mdash; they surface what the
-                            business actually cares about.</small></p>
-                </section>
-            </section>
-            
-            <!-- DDD - Domains, Sub-domains &amp; Bounded Contexts -->
-            <section>
-                <section>
-                    <h2>DDD - Domains, Sub-domains &amp; Bounded Contexts</h2>
+                    <p>Subdomain (discover)</p>
+                    <q>Smaller business capabilities inside the domain.</q>
                     <ul>
-                        <li><strong>Domain</strong> &mdash; the whole business problem space.</li>
-                        <li><strong>Subdomain</strong> &mdash; a coherent area of expertise, discovered during event
-                            storming.</li>
-                        <li><strong>Bounded Context</strong> &mdash; explicit boundary where a model is
-                            self-consistent.
-                            <em>Member</em> in Lending &ne; <em>Member</em> in Notifications.
-                        </li>
+                        <li>Can this member borrow this copy?</li>
+                        <li>Is this copy available?</li>
+                        <li>What due date should be assigned?</li>
+                        <li>How many active loans can a member have?</li>
+                        <li>What happens when the copy is borrowed?</li>
                     </ul>
-                    <table class="outcome">
+                </section>
+
+                <section>
+                    <h2>DDD - Problem Space</h2>
+
+                    <table class="outcome compact">
                         <thead>
                             <tr>
-                                <th>Bounded Context</th>
-                                <th>Owns</th>
-                                <th>Language sample</th>
+                                <th>Subdomain</th>
+                                <th>Main responsibility</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Lending</td>
-                                <td>Loan, Copy, Member</td>
-                                <td>borrow, extend, overdue</td>
+                                <td>Catalog Management</td>
+                                <td>Managing titles and their physical copies</td>
                             </tr>
                             <tr>
-                                <td>Catalog</td>
-                                <td>Title, Edition, Copy</td>
-                                <td>acquire, catalog, withdraw</td>
+                                <td>Fine Management</td>
+                                <td>Charging members for overdue or lost copies</td>
                             </tr>
                             <tr>
-                                <td>Notifications</td>
-                                <td>Recipient, Message</td>
-                                <td>notify, reminder, channel</td>
+                                <td>Loan Management</td>
+                                <td>Borrowing and returning copies</td>
+                            </tr>
+                            <tr>
+                                <td>Membershgip Management</td>
+                                <td>Managing users and accounts</td>
+                            </tr>
+                            <tr>
+                                <td>Overdue Management</td>
+                                <td>Detecting and handling overdue loans</td>
+                            </tr>
+                            <tr>
+                                <td>Reservation Management</td>
+                                <td>Holding a title when no copies are available</td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
-                <section>
-                    <h3>Model</h3>
-                    <p>A useful simplification &mdash; only what matters inside this context.</p>
-                    <div class="code-compare">
-                        <div>
-                            <p>Lending context cares about:</p>
-                            <pre><code class="language-go">type Loan struct {
-    ID       LoanID
-    Status   LoanStatus
-    CopyID   CopyID
-    MemberID MemberID
-    DueDate  DueDate
-}</code></pre>
-                        </div>
-                        <div>
-                            <p>Does not care about:</p>
-                            <ul>
-                                <li>Member avatar</li>
-                                <li>Book cover image</li>
-                                <li>Shelf location</li>
-                                <li>Acquisition source</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <p><small>Those may matter in Catalog or Membership &mdash; not here.</small></p>
-                </section>
-            </section>
 
-            <section>
+                <aside class="notes">
+                    Domain: managing movement and availability of lib materials (representation of reality)
+                    <br />
+                    Subdomain: business capabilities
+                </aside>
                 <section>
-                    <h2>DDD - Context Maps</h2>
-                    <p>A context map makes inter-context coupling explicit and names the integration pattern.</p>
+                    <h2>DDD - Solution Space</h2>
+                    <p>Bounded Context (chose/design)</p>
+                    <q>Inside this boundary, these words mean exactly this, and this model owns these rules.</q>
                 </section>
                 <section>
-                    <div class="mermaid">
-                        graph LR
-                        Lending -->|"Customer / Supplier"| Catalog
-                        Lending -->|"Conformist"| Notifications
-                        Lending -->|"ACL"| Legacy["Legacy ILS"]
+                    <p>Domain: Library Circulation</p>
+                    <table class="outcome compact">
+                        <thead>
+                            <tr>
+                                <th>Subdomain</th>
+                                <th>Main responsibility</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Catalog Management</td>
+                                <td>Managing titles and their physical copies</td>
+                            </tr>
+                            <tr>
+                                <td>Fine Management</td>
+                                <td>Charging members for overdue or lost copies</td>
+                            </tr>
+                            <tr>
+                                <td>Loan Management</td>
+                                <td>Borrowing and returning copies</td>
+                            </tr>
+                            <tr>
+                                <td>Membershgip Management</td>
+                                <td>Managing users and accounts</td>
+                            </tr>
+                            <tr>
+                                <td>Overdue Management</td>
+                                <td>Detecting and handling overdue loans</td>
+                            </tr>
+                            <tr>
+                                <td>Reservation Management</td>
+                                <td>Holding a title when no copies are available</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                        style Lending fill:#1a6,color:#fff
-                        style Legacy fill:#666,color:#fff
-                    </div>
-                    <p><small>ACL = Anti-Corruption Layer: translates a foreign model at the boundary before it can
-                            corrupt your domain.</small></p>
-                </section>
-            </section>
-            
-            <section> <!-- DDD - Message Types --> 
-                <section>
-                    <h2>DDD - Message Types</h2>
-                    <p>Events from the workshop fall into three distinct roles that shape how the model is
-                        structured.
-                </section>
-                <section>
+                    <p>Bounded Context:
+                        <br>
+                        <code>Catalog</code>,
+                        <code>Loan</code>,
+                        <code>Overdue</code> (fine and overdue),
+                        <code>Reservation</code> and
+                        <code>Membership</code>
                     </p>
-                    <table class="outcome">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>What it is</th>
-                                <th>BorrowBook example</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Command</strong></td>
-                                <td>An intent. May be rejected.</td>
-                                <td><code>BorrowBook{MemberID, CopyID}</code></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Event</strong></td>
-                                <td>A fact. Immutable, past tense.</td>
-                                <td><code>BookBorrowed{LoanID, At time.Time}</code></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Query</strong></td>
-                                <td>A read request. No side effects.</td>
-                                <td><code>ActiveLoansByMember{MemberID}</code></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p><small>Commands and queries enter the domain from outside. Events flow out &mdash; or drive
-                            consistency between aggregates.</small></p>
                 </section>
-                <section>
-                    <h3>Domain vs Integration Events</h3>
-                    <table class="outcome">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Purpose</th>
-                                <th>Audience</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Domain event</strong></td>
-                                <td>Capture a business fact</td>
-                                <td>Same bounded context</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Application event</strong></td>
-                                <td>Coordinate app behavior</td>
-                                <td>Application layer</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Integration event</strong></td>
-                                <td>Notify other systems</td>
-                                <td>Outside world</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <pre><code class="language-text">loan.Return()
-    emits BookReturned           ← domain event
-Application saves Loan
-Handler reacts:
-    send overdue notice          ← application event
-    publish book.returned.v1     ← integration event</code></pre>
-                </section>
+
+                <aside class="notes">
+                    Default is 1 subdomain → 1
+                    <br>
+                    Subdomains &gt; bounded context: app is small and the language/model/rules are shared;
+                    <br>
+                    Subdomain &le; bounded contexts: when it contains different languages, lifecycles, ownership, or
+                    change
+                    rhythms; adapt when a shared model becomes confusing or painful.
+                </aside>
             </section>
 
+            <!-- DDD - Strategize -->
             <section>
                 <section>
-                    <h2>DDD - Strategize</h2>
-                    <p>Classify subdomains to decide where to invest design effort.</p>
+                    <h2>DDD Strategy</h2>
+                    <p>Worth investing</p>
                 </section>
                 <section>
                     <table class="outcome">
@@ -1611,13 +1603,26 @@ Handler reacts:
                     <p><small>DDD investment follows the core domain. Don't apply heavy tactical patterns to generic
                             subdomains.</small></p>
                 </section>
+                <section>
+                    <img src="assets/base.png" alt="Base" style="max-height:80vh;width:auto;" />
+                </section>
             </section>
-            
+
             <section>
                 <section>
-                    <h2>DDD - Code Architecture</h2>
-                    <p>The bounded context becomes the module. Hexagonal Architecture wires it to the outside world.
-                    </p>
+                    <h2>DDD Strategy</h2>
+                    <p>Going Deep</p>
+                </section>
+                <section>
+                    <img src="assets/bounded-context-canvas-v5.jpg" alt="Bounded Context Canvas" style="max-height:80vh;width:auto;" />
+                </section>
+            </section>
+
+            <!-- DDD - Code Architecture -->
+            <section>
+                <section>
+                    <h2>DDD Tactic</h2>
+                    <p>Architecture Implementation</p>
                 </section>
                 <section>
                     <div class="mermaid">
@@ -1636,7 +1641,8 @@ Handler reacts:
                 </section>
                 <section>
                     <h3>Entity</h3>
-                    <p>An object with <strong>identity</strong>. Remains the same thing even as its attributes change.</p>
+                    <p>An object with <strong>identity</strong>. Remains the same thing even as its attributes change.
+                    </p>
                     <pre><code class="language-go">type Loan struct {
     id     LoanID
     status LoanStatus
@@ -1661,8 +1667,10 @@ func NewDueDate(t time.Time) (DueDate, error) {
     }
     return DueDate{value: t}, nil
 }</code></pre>
-                    <p><small><strong>Entity = who is it?</strong> &nbsp;|&nbsp; <strong>Value Object = what is it?</strong></small></p>
-                    <p><small>Good candidates: <code>LoanID</code>, <code>MemberID</code>, <code>DueDate</code>, <code>LoanPeriod</code></small></p>
+                    <p><small><strong>Entity = who is it?</strong> &nbsp;|&nbsp; <strong>Value Object = what is
+                                it?</strong></small></p>
+                    <p><small>Good candidates: <code>LoanID</code>, <code>MemberID</code>, <code>DueDate</code>,
+                            <code>LoanPeriod</code></small></p>
                 </section>
                 <section>
                     <h3>Aggregate</h3>
@@ -1702,7 +1710,8 @@ func (s LoanEligibilityService) CheckEligibility(
     // copy available
     // policy allows it
 }</code></pre>
-                    <p><small>Speaks the business language. Not a generic <code>LoanManager</code> or <code>LoanHelper</code>.</small></p>
+                    <p><small>Speaks the business language. Not a generic <code>LoanManager</code> or
+                            <code>LoanHelper</code>.</small></p>
                 </section>
                 <section>
                     <h3>Application Service</h3>
@@ -1722,7 +1731,8 @@ func (s LoanEligibilityService) CheckEligibility(
 
     return h.events.Publish(ctx, loan.PullEvents()...)
 }</code></pre>
-                    <p><small><strong>Application service:</strong> what steps? &nbsp;|&nbsp; <strong>Domain:</strong> what rules?</small></p>
+                    <p><small><strong>Application service:</strong> what steps? &nbsp;|&nbsp; <strong>Domain:</strong>
+                            what rules?</small></p>
                 </section>
                 <section>
                     <h3>Services at a glance</h3>
@@ -1757,11 +1767,12 @@ func (s LoanEligibilityService) CheckEligibility(
                             </tr>
                         </tbody>
                     </table>
-                    <p><small>When someone says "service" &mdash; ask: which layer? Business rules, orchestration, or technical detail?</small></p>
+                    <p><small>When someone says "service" &mdash; ask: which layer? Business rules, orchestration, or
+                            technical detail?</small></p>
                 </section>
             </section>
-            </section>
-            
+
+            <!-- The simplest target architecture -->
             <section>
                 <h2>The simplest target architecture</h2>
                 <ul>
@@ -1771,7 +1782,8 @@ func (s LoanEligibilityService) CheckEligibility(
                     <li>Do not start with microservices by default.</li>
                 </ul>
             </section>
-            
+
+            <!-- Go helps the new slice stay simple -->
             <section>
                 <h2>Go helps the new slice stay simple</h2>
                 <ul>
@@ -1779,59 +1791,54 @@ func (s LoanEligibilityService) CheckEligibility(
                     <li>Go helps keep the new slice operationally simple.</li>
                     <li>Small language surface and strong standard library.</li>
                     <li>Standard tooling, static binaries, and fast builds.</li>
-                    <li>Straightforward deployment, clear concurrency, and Go 1 compatibility.</li>
-                    <li>Use Go for maintainability and operational simplicity, not as a universal performance answer.
+                    <li>Straightforward deployment, clear concurrency, and Go 1 compatibility since 🎁.</li>
+                    <li>Maintainability and operational simplicity, not performance.
                     </li>
                 </ul>
+
+                <aside class="notes">March 2012</aside>
             </section>
             
+            <!-- Conclusion -->
             <section>
-                <h2>Demo</h2>
-                <h2>👹</h2>
+                <h2>Key takeaways</h2>
+                <ul>
+                    <li>Use DDD to find the seam first</li>
+                    <li>Stay in production — no dark tunnels</li>
+                    <li>Make each step independently reversible</li>
+                    <li>Control scope like a gatekeeper</li>
+                    <li>Encode your architecture as fitness functions</li>
+                    <li>Let Go keep the new slice operationally simple</li>
+                </ul>
+
+                <aside class="notes">
+                    Stay in production: The #1 success factor across every case: always be in a position where you can
+                    see what's happening and can go back.
+                    <br>
+                    <br>
+                    Use DDD to find the seam first: Bounded contexts turn business capabilities into migration
+                    units. Business value aligns with code boundaries — the design teaches the business about itself.
+                    <br>
+                    <br>
+                    Make each step independently reversible: Every successful migration had no single commit
+                    point. Dual-write, feature gates, shadow validation — all exist to preserve the option to go back.
+                    <br>
+                    <br>
+                    Control scope like a gatekeeper: Port and new features never mix. The projects that
+                    finished had someone who said no to every net-new idea during migration.
+                    <br>
+                    <br>
+                    Encode your architecture as fitness functions: Boundary contracts, shadow diff rates, and
+                    coverage gates don't survive on good intentions. Automate the checks before the first merge.
+                    <br>
+                    <br>
+                    Let Go keep the new slice operationally simple: Small language surface, static binaries, Go
+                    1 compatibility. Spend your complexity budget on the domain, not the runtime.
+                </aside>
             </section>
-            
+
             <section>
-                <h2>BorrowBook</h2>
-                <p>A small library-loan slice that shows DDD as simplification.</p>
-                <div class="code-compare">
-                    <div>
-                        <h3>Before</h3>
-                        <pre><code class="language-go">func BorrowBook(w http.ResponseWriter, r *http.Request) {
-                                member := loadMember(r.FormValue("member_id"))
-                                copy := loadCopy(r.FormValue("copy_id"))
-
-                                if member.Blocked || member.ActiveLoans >= 5 || copy.Borrowed {
-                                http.Error(w, "cannot borrow", http.StatusConflict)
-                                return
-                                }
-
-                                copy.Borrowed = true
-                                copy.BorrowedBy = member.ID
-                                copy.DueAt = time.Now().AddDate(0, 0, 21)
-                                saveCopy(copy)
-                                }</code></pre>
-                    </div>
-                    <div>
-                        <h3>After</h3>
-                        <pre><code class="language-go">func (h BorrowBookHandler) Handle(ctx context.Context, cmd
-                                BorrowBook) error {
-                                member := h.members.Get(ctx, cmd.MemberID)
-                                copy := h.copies.Get(ctx, cmd.CopyID)
-
-                                if err := member.CanBorrow(); err != nil {
-                                return err
-                                }
-
-                                loan := copy.MarkBorrowedBy(member.ID, h.clock.Today())
-                                return h.loans.Save(ctx, loan)
-                                }</code></pre>
-                    </div>
-                </div>
-            </section>
-            
-            <section>
-                <h2>Rewrites should be simple.</h2>
-                <p>Preserve the business capability. Reduce accidental entanglement. Keep feedback alive.</p>
+                <h2>Questions</h2>
             </section>
         </div>
     </div>
@@ -1845,7 +1852,7 @@ func (s LoanEligibilityService) CheckEligibility(
         // More info about initialization & config:
         // - https://revealjs.com/initialization/
         // - https://revealjs.com/config/
-        mermaid.initialize({startOnLoad: false, theme: 'dark', securityLevel: 'loose'});
+        mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
 
         Reveal.initialize({
             hash: true,
@@ -1853,7 +1860,7 @@ func (s LoanEligibilityService) CheckEligibility(
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
         }).then(() => {
-            mermaid.run({querySelector: '.mermaid'});
+            mermaid.run({ querySelector: '.mermaid' });
         });
     </script>
 </body>

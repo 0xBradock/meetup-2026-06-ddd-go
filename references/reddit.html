@@ -1,0 +1,940 @@
+<shreddit-post
+    class="block xs:mt-xs xs:-mx-xs xs:px-xs xs:rounded-4 pt-xs nd:pt-xs bg-[color:var(--shreddit-content-background)] box-border nd:visible mb-xs nd:pb-2xl"
+    permalink="/r/RedditEng/comments/1mbqto6/modernizing_reddits_comment_backend_infrastructure/"
+    content-href="https://www.reddit.com/r/RedditEng/comments/1mbqto6/modernizing_reddits_comment_backend_infrastructure/"
+    view-context="CommentsPage" comment-count="40" award-count="2" award-id="award_helpful"
+    award-icon-url="https://www.redditstatic.com/marketplace-assets/v1/core/awards/helpful_v1_40.png"
+    moderation-verdict="" is-embeddable="" is-desktop-viewport="" is-awardable=""
+    short-link-experiment-variant="enabled" short-link-experiment-version="7" share-button-ssr="" show-full-content=""
+    created-timestamp="2025-07-28T20:06:49.869000+0000" domain="self.RedditEng" id="t3_1mbqto6"
+    post-title="Modernizing Reddit's Comment Backend Infrastructure" post-language="en" post-type="multi_media"
+    score="558" upvote-ratio="0.99644128113879" subreddit-id="t5_49fkib" subreddit-prefixed-name="r/RedditEng"
+    author-id="t2_rqbm4x6pc" author="Okgaroo"
+    icon="https://preview.redd.it/snoovatar/avatars/nftv2_bmZ0X2VpcDE1NToxMzdfMjcwZDUyMzgzNTU4MDE2NzdkNGY3MzZhNTA2YjI4YTkxZDVjNjRkYl84OA_rare_ee24653f-887c-44f5-98f8-fecb8cdc4ac3-headshot.png?width=64&amp;height=64&amp;crop=smart&amp;auto=webp&amp;s=ce9214fc389772116a806898933d0211fc51d4da"
+    data-expected-lcp="" subreddit-name="RedditEng" item-state="UNMODERATED"><template shadowrootmode="open"><!---->
+        <slot name="full-post-link"></slot> <!--?lit$430296627$-->
+        <slot name="credit-bar"></slot> <!--?lit$430296627$--><!--?-->
+        <slot name="ssr-post-content-header">
+            <div id="content-tag-container" class="flex justify-between gap-xs  px-md xs:px-0 ">
+                <!--?lit$430296627$--><shreddit-content-tags post-id="t3_1mbqto6"><template
+                        shadowrootmode="open"><!----></template></shreddit-content-tags> <!--?lit$430296627$-->
+            </div>
+        </slot> <!--?lit$430296627$-->
+        <div class="flex">
+            <div class="flex flex-col grow max-w-full"> <!--?lit$430296627$-->
+                <slot name="title"></slot> <!--?lit$430296627$-->
+                <slot class="pdp-flair-slot" name="post-flair"></slot>
+                <slot name="mod-content-state-indicators"></slot> <!--?lit$430296627$--> <!--?lit$430296627$-->
+            </div> <!--?lit$430296627$-->
+            <div><!--?lit$430296627$-->
+                <slot name="thumbnail"></slot>
+            </div>
+        </div> <!--?lit$430296627$-->
+        <slot name="post-media-container" class="xs:pt-md"></slot> <!--?lit$430296627$-->
+        <slot name="text-body"></slot>
+        <slot></slot> <!--?lit$430296627$--> <!--?lit$430296627$--> <!--?lit$430296627$--> <!--?lit$430296627$-->
+        <slot name="post-archived-banner"></slot> <!--?lit$430296627$-->
+        <slot name="post-removed-banner"></slot> <!--?lit$430296627$-->
+        <slot name="post-recovery-section"></slot> <!--?lit$430296627$--> <rpl-action-bar post-id="t3_1mbqto6"><template
+                shadowrootmode="open"><!---->
+                <slot></slot>
+            </template>
+            <div data-testid="action-row" tabindex="0"
+                class="  shreddit-post-container flex gap-sm flex-row items-center flex-nowrap justify-start overflow-x-scroll scrollbar-hide overflow-y-hidden touch-pan-x overscroll-x-contain xs:overflow-x-hidden h-2xl mt-md px-md xs:px-0 "
+                aria-label="Actions available for this post"> <!--?lit$430296627$--><!----> <span
+                    class="relative leading-[0] "> <shreddit-vote-animations thing-id="t3_1mbqto6"><template
+                            shadowrootmode="open"><!---->
+                            <slot></slot>
+                        </template> <!--?lit$430296627$--><span rpl="" class="
+      rpl-vote-button-group p-0 button-shell overflow-visible font-semibold flex items-center cursor-auto
+      flex flex-row justify-center items-center h-xl font-semibold relative
+      
+       text-label-2 button-secondary button-activated inline-flex items-center" data-post-click-location="vote">
+                            <!--?lit$430296627$--><!--?lit$430296627$--><button rpl="" aria-pressed="false"
+                                class=" group button flex justify-center aspect-square p-0 border-0 button-secondary disabled:text-interactive-content-disabled button-plain inline-flex items-center"
+                                data-action-bar-action="upvote" style="height: var(--size-button-sm-h);" upvote="">
+                                <!--?lit$430296627$--><span
+                                    class="flex mx-xs text-body-1 vote-icon-outline"><!--?lit$430296627$--><svg rpl=""
+                                        fill="currentColor" height="16" icon-name="upvote" viewBox="0 0 20 20"
+                                        width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <!--?lit$430296627$--><!--?lit$430296627$-->
+                                        <path
+                                            d="M10 19a3.966 3.966 0 01-3.96-3.962V10.98H2.838a1.731 1.731 0 01-1.605-1.073 1.734 1.734 0 01.377-1.895L9.364.254a.925.925 0 011.272 0l7.754 7.759c.498.499.646 1.242.376 1.894-.27.652-.9 1.073-1.605 1.073h-3.202v4.058A3.965 3.965 0 019.999 19H10zM2.989 9.179H7.84v5.731c0 1.13.81 2.163 1.934 2.278a2.163 2.163 0 002.386-2.15V9.179h4.851L10 2.163 2.989 9.179z">
+                                        </path><!--?-->
+                                    </svg></span> <span
+                                    class="flex mx-xs text-body-1 vote-icon-fill"><!--?lit$430296627$--><svg rpl=""
+                                        fill="currentColor" height="16" icon-name="upvote-fill" viewBox="0 0 20 20"
+                                        width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <!--?lit$430296627$--><!--?lit$430296627$-->
+                                        <path
+                                            d="M10 19a3.966 3.966 0 01-3.96-3.962V10.98H2.838a1.731 1.731 0 01-1.605-1.073 1.734 1.734 0 01.377-1.895L9.364.254a.925.925 0 011.272 0l7.754 7.759c.498.499.646 1.242.376 1.894-.27.652-.9 1.073-1.605 1.073h-3.202v4.058A3.965 3.965 0 019.999 19H10z">
+                                        </path><!--?-->
+                                    </svg></span> <!--?lit$430296627$--><faceplate-screen-reader-content><template
+                                        shadowrootmode="open"><!---->
+                                        <slot></slot>
+                                    </template> <!--?lit$430296627$-->Upvote </faceplate-screen-reader-content><!--?-->
+                            </button> <!--?lit$430296627$--><span> <faceplate-number pretty=""
+                                    number="558"><!---->558</faceplate-number> </span> <!--?lit$430296627$--><button
+                                rpl="" aria-pressed="false"
+                                class=" group button flex justify-center aspect-square p-0 border-0 button-secondary disabled:text-interactive-content-disabled button-plain inline-flex items-center"
+                                data-action-bar-action="downvote" style="height: var(--size-button-sm-h);" downvote="">
+                                <!--?lit$430296627$--><span
+                                    class="flex mx-xs text-body-1 vote-icon-outline"><!--?lit$430296627$--><svg rpl=""
+                                        fill="currentColor" height="16" icon-name="downvote" viewBox="0 0 20 20"
+                                        width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <!--?lit$430296627$--><!--?lit$430296627$-->
+                                        <path
+                                            d="M10 1a3.966 3.966 0 013.96 3.962V9.02h3.202c.706 0 1.335.42 1.605 1.073.27.652.122 1.396-.377 1.895l-7.754 7.759a.925.925 0 01-1.272 0l-7.754-7.76a1.734 1.734 0 01-.376-1.894c.27-.652.9-1.073 1.605-1.073h3.202V4.962A3.965 3.965 0 0110 1zm7.01 9.82h-4.85V5.09c0-1.13-.81-2.163-1.934-2.278a2.163 2.163 0 00-2.386 2.15v5.859H2.989l7.01 7.016 7.012-7.016z">
+                                        </path><!--?-->
+                                    </svg></span> <span
+                                    class="flex mx-xs text-body-1 vote-icon-fill"><!--?lit$430296627$--><svg rpl=""
+                                        fill="currentColor" height="16" icon-name="downvote-fill" viewBox="0 0 20 20"
+                                        width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <!--?lit$430296627$--><!--?lit$430296627$-->
+                                        <path
+                                            d="M10 1a3.966 3.966 0 013.96 3.962V9.02h3.202c.706 0 1.335.42 1.605 1.073.27.652.122 1.396-.377 1.895l-7.754 7.759a.925.925 0 01-1.272 0l-7.754-7.76a1.734 1.734 0 01-.376-1.894c.27-.652.9-1.073 1.605-1.073h3.202V4.962A3.965 3.965 0 0110 1z">
+                                        </path><!--?-->
+                                    </svg></span> <!--?lit$430296627$--><faceplate-screen-reader-content><template
+                                        shadowrootmode="open"><!---->
+                                        <slot></slot>
+                                    </template> <!--?lit$430296627$-->Downvote
+                                </faceplate-screen-reader-content><!--?--> </button><!--?--> </span>
+                    </shreddit-vote-animations> </span><!----><!----><button rpl="" class="button border-sm flex flex-row justify-center items-center h-xl font-semibold relative min-w-fit text-label-2 button-secondary  inline-flex items-center
+       px-sm py-xs
+      " data-post-click-location="comments-button" data-action-bar-action="comments" name="comments-action-button"
+                    style="height: var(--size-button-sm-h);" type="button" actioned=""> <!--?lit$430296627$--><span
+                        class="flex items-center"> <!--?lit$430296627$--><span
+                            class="flex text-body-1 me-2xs"><!--?lit$430296627$--><svg rpl="" aria-hidden="true"
+                                class="icon-comment rpl-rtl-icon" fill="currentColor" height="16" icon-name="comment"
+                                viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                <!--?lit$430296627$--><!--?lit$430296627$-->
+                                <path
+                                    d="M10 1a9 9 0 00-9 9c0 1.947.79 3.58 1.935 4.957L.231 17.661A.784.784 0 00.785 19H10a9 9 0 009-9 9 9 0 00-9-9zm0 16.2H6.162c-.994.004-1.907.053-3.045.144l-.076-.188a36.981 36.981 0 002.328-2.087l-1.05-1.263C3.297 12.576 2.8 11.331 2.8 10c0-3.97 3.23-7.2 7.2-7.2s7.2 3.23 7.2 7.2-3.23 7.2-7.2 7.2z">
+                                </path><!--?-->
+                            </svg></span> <!--?lit$430296627$--><span> <!--?lit$430296627$--><!----><faceplate-number
+                                pretty="" number="40"><!---->40</faceplate-number><!----><!----><!----> </span> </span>
+                    <!--?lit$430296627$--><faceplate-screen-reader-content><template shadowrootmode="open"><!---->
+                            <slot></slot>
+                        </template> <!--?lit$430296627$-->Go to comments </faceplate-screen-reader-content><!--?-->
+                </button><!----><!---->
+                <slot name="repost-button"></slot> <!----><!----><award-button appearance="secondary" size="sm"
+                    button-class="flex flex-row justify-center items-center h-xl font-semibold relative"
+                    thing-id="t3_1mbqto6" count="2" award-id="award_helpful"
+                    icon-url="https://www.redditstatic.com/marketplace-assets/v1/core/awards/helpful_v1_40.png"
+                    subreddit-id="t5_49fkib" post-id="t3_1mbqto6" post-type="multi_media" score="558" comment-count="40"
+                    data-post-click-location="award-button"><template shadowrootmode="open"><!----><button rpl=""
+                            aria-label="Give award, 2 awards given" class="button border-sm overflow-visible flex flex-row justify-center items-center h-xl font-semibold relative text-label-2 button-secondary  inline-flex items-center
+       px-sm py-xs
+      " style="height: var(--size-button-sm-h);" type="button"> <!--?lit$430296627$--><span class="flex items-center">
+                                <!--?lit$430296627$--><span class="flex text-body-1 me-2xs"><!--?lit$430296627$--><span
+                                        aria-hidden="true" class="flex relative"> <!--?lit$430296627$--><span
+                                            class="glow"> <!--?lit$430296627$--><!----><span class="sunbeam"
+                                                style="--n:0;"></span><!----><!----><span class="sunbeam"
+                                                style="--n:1;"></span><!----><!----><span class="sunbeam"
+                                                style="--n:2;"></span><!----><!----><span class="sunbeam"
+                                                style="--n:3;"></span><!----><!----><span class="sunbeam"
+                                                style="--n:4;"></span><!----><!----><span class="sunbeam"
+                                                style="--n:5;"></span><!----><!----><span class="sunbeam"
+                                                style="--n:6;"></span><!----><!----><span class="sunbeam"
+                                                style="--n:7;"></span><!----> </span> <!--?lit$430296627$--> <img alt=""
+                                            class="relative"
+                                            src="https://www.redditstatic.com/marketplace-assets/v1/core/awards/helpful_v1_40.png"
+                                            width="16" height="16"> </span></span> <!--?lit$430296627$--><span>
+                                    <!--?lit$430296627$--><faceplate-number pretty="" aria-hidden="true"
+                                        number="2"><!---->2</faceplate-number> </span> </span>
+                            <!--?lit$430296627$--><!--?--> </button></template></award-button><!----><!---->
+                <slot name="share-button"> <!--?lit$430296627$--> <shreddit-post-share-button
+                        data-action-bar-action="share" appearance="secondary" data-post-click-location="share"
+                        permalink="/r/RedditEng/comments/1mbqto6/modernizing_reddits_comment_backend_infrastructure/"
+                        source-id="t3_1mbqto6" is-embeddable="" is-desktop-viewport="" ssr=""
+                        short-link-experiment-variant="enabled" short-link-experiment-version="7" size="sm"
+                        button-class="flex flex-row justify-center items-center h-xl font-semibold relative"
+                        data-faceplate-tracking-context="{&quot;post&quot;:{&quot;id&quot;:&quot;t3_1mbqto6&quot;}}"><template
+                            shadowrootmode="open"><!---->
+                            <slot name="ssr-share-button"></slot>
+                        </template> <!--?lit$430296627$-->
+                        <slot name="ssr-share-button" slot="ssr-share-button"></slot>
+                    </shreddit-post-share-button> </slot> <!---->
+                <div class="ms-auto flex flex-row">
+                    <slot name="mod-content-actions"></slot>
+                    <slot name="promote-post-button"></slot>
+                </div>
+                <slot name="action-row-whitespace"></slot>
+            </div>
+        </rpl-action-bar> <!--?lit$430296627$-->
+        <slot name="post-stats-entry-point"></slot> <!--?lit$430296627$-->
+        <slot name="post-insights-panel"></slot>
+    </template>
+
+
+    <div slot="credit-bar" id="pdp-credit-bar" class="flex justify-between text-12 px-md xs:px-0 relative pb-2xs pt-md">
+        <span class="flex gap-xs items-center pe-xs truncate ">
+
+            <pdp-back-button
+                class="hidden xs:block w-xl h-xl pdp-float-back-btn:absolute pdp-float-back-btn:top-md pdp-float-back-btn:-start-[2.5rem]"
+                post-id="t3_1mbqto6" subreddit-prefixed-name="r/RedditEng"><template shadowrootmode="open"><!---->
+                    <!--?lit$430296627$--><button rpl="" aria-label="Back" class="
+button-small px-[calc(var(--rem10)-var(--button-border-width,0px))]
+button-secondary
+
+
+icon
+items-center justify-center
+button inline-flex " type="button"> <!--?lit$430296627$--><!----><span class="flex items-center justify-center">
+                            <!--?lit$430296627$--><span class="flex"><!--?lit$430296627$--><svg rpl=""
+                                    class="rpl-rtl-icon" fill="currentColor" height="16" icon-name="arrow-back"
+                                    viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                    <!--?lit$430296627$--><!--?lit$430296627$-->
+                                    <path
+                                        d="M17.5 9.1H4.679l5.487-5.462a.898.898 0 00.003-1.272.898.898 0 00-1.272-.003l-7.032 7a.898.898 0 000 1.275l7.03 7a.896.896 0 001.273-.003.898.898 0 00-.002-1.272l-5.487-5.462h12.82a.9.9 0 000-1.8z">
+                                    </path><!--?-->
+                                </svg></span> <!--?lit$430296627$--> </span>
+                        <!--?lit$430296627$--><!--?--><!----><!----><faceplate-screen-reader-content><template
+                                shadowrootmode="open"><!---->
+                                <slot></slot>
+                            </template><!--?lit$430296627$-->Back</faceplate-screen-reader-content><!----> </button>
+                </template></pdp-back-button>
+
+            <span class="avatar text-32 items-center overflow-hidden shrink-0 indent-0 w-xl h-xl">
+                <faceplate-tracker source="post_credit_bar" action="click" noun="community" class="visible">
+                    <a href="https://www.reddit.com/r/RedditEng/"
+                        class="no-underline hover:no-underline active:no-underline text-secondary focus-visible:-outline-offset-1">
+                        <div class="h-xl w-xl">
+                            <span class="inline-flex items-center justify-center w-xl h-xl relative " rpl="" avatar=""
+                                data-no-rtl-mirror="">
+
+                                <span rpl="" class="inline-block rounded-full  relative [&amp;&gt;:first-child]:h-full [&amp;&gt;:first-child]:w-full [&amp;&gt;:first-child]:mb-0 [&amp;&gt;:first-child]:rounded-[inherit] h-full w-full
+    [&amp;&gt;:first-child]:overflow-hidden [&amp;&gt;:first-child]:max-h-full">
+                                    <img src="https://styles.redditmedia.com/t5_49fkib/styles/communityIcon_fun9xzizddve1.png?width=96&amp;height=96&amp;frame=1&amp;auto=webp&amp;crop=96%3A96%2Csmart&amp;s=6631688d61bef005ed9953fc61fe9feae281b358"
+                                        alt=""
+                                        class="mb-0 shreddit-subreddit-icon__icon rounded-full overflow-hidden nd:visible nd:bg-secondary-background  w-full h-full"
+                                        width="32" style="color: #FF4500;background: #EDEFF1;width: 32px;"
+                                        loading="lazy">
+                                </span></span>
+                        </div>
+                        <faceplate-screen-reader-content><template shadowrootmode="open"><!---->
+                                <slot></slot>
+                            </template>
+                            Go to RedditEng
+                        </faceplate-screen-reader-content>
+                    </a>
+                    <!----></faceplate-tracker>
+            </span>
+
+            <div class="flex gap-0 flex-col truncate" role="group">
+                <span class="flex flex-none items-center flex-row gap-2xs flex-nowrap">
+                    <span class="flex flex-none subreddit-name neutral-content font-bold text-12 whitespace-nowrap">
+                        <faceplate-tracker source="post_credit_bar" action="click" noun="community" class="visible">
+
+                            <faceplate-hovercard enter-delay="500" leave-delay="150" position="bottom-start"
+                                data-id="community-hover-card" label="r/RedditEng" mouse-only="" class="nd:visible"
+                                appearance="neutral"><template shadowrootmode="open"><!---->
+                                    <slot aria-describedby="faceplate-tooltip" faceplate-popper-trigger=""></slot>
+                                    <div id="faceplate-tooltip" role="dialog" part="content-container"
+                                        faceplate-popper-content="" aria-label="r/RedditEng" position="bottom"
+                                        style="display: none;">
+                                        <slot name="content"></slot>
+                                    </div>
+                                </template>
+                                <a rpl="" class="subreddit-name whitespace-nowrap text-12 text-neutral-content font-bold focus-visible:-outline-offset-1  a
+  
+  
+  
+  no-visited
+  no-underline hover:no-underline
+  
+  cursor-pointer" href="https://www.reddit.com/r/RedditEng/" aria-haspopup="dialog"
+                                    aria-expanded="false">r/RedditEng</a>
+                                <div slot="content" hidden="">
+                                    <faceplate-partial src="/svc/shreddit/community-hover-card/RedditEng"
+                                        loading="programmatic"><template shadowrootmode="open"><!---->
+                                            <div>
+                                                <slot></slot>
+                                            </div>
+                                        </template>
+                                        <div class="w-5xl h-4xl flex items-center justify-center">
+                                            <faceplate-progress value="20" class="animate-spin"
+                                                status="incomplete"><template shadowrootmode="open"><!----> <svg
+                                                        viewBox="0 0 40 40" class="loader"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <circle class="bg" cx="20" cy="20" r="16"></circle>
+                                                        <circle cx="20" cy="20" stroke-linecap="round"
+                                                            class="track incomplete" r="16"
+                                                            stroke-dasharray="100.53096491487338 100.53096491487338"
+                                                            stroke-dashoffset="80.4247719318987"></circle>
+                                                    </svg>
+                                                    <div class="icon">
+                                                        <slot name="incomplete"></slot>
+                                                    </div>
+                                                </template></faceplate-progress>
+                                        </div>
+                                    </faceplate-partial>
+                                </div>
+                            </faceplate-hovercard>
+
+                            <!----></faceplate-tracker>
+                    </span>
+
+                    <span id="time-ago-separator"
+                        class="flex items-center w-2xs text-neutral-content-weak font-normal text-12"
+                        aria-hidden="true">•</span><faceplate-timeago ts="2025-07-28T20:06:49.869Z" format="narrow"
+                        locale="en-US-u-nu-latn"
+                        class="flex items-center whitespace-nowrap text-neutral-content-weak font-normal text-12"><!---->
+                        <time datetime="2025-07-28T20:06:49.869Z"
+                            title="Monday, July 28, 2025 at 10:06:49 PM GMT+2"><!--?lit$430296627$-->1y ago</time>
+                    </faceplate-timeago>
+                    <shreddit-brand-affiliate-tag post-id="t3_1mbqto6"
+                        class="contents"><!----></shreddit-brand-affiliate-tag>
+                </span>
+                <div class="flex flex-none flex-row gap-2xs items-center flex-nowrap">
+
+                    <span slot="authorName" class="flex">
+                        <div class="inline-flex items-center max-w-full">
+
+                            <faceplate-hovercard enter-delay="500" leave-delay="150" position="bottom-start"
+                                data-id="user-hover-card" close-on-track="" label="Okgaroo details" mouse-only=""
+                                appearance="neutral"><template shadowrootmode="open"><!---->
+                                    <slot aria-describedby="faceplate-tooltip" faceplate-popper-trigger=""></slot>
+                                    <div id="faceplate-tooltip" role="dialog" part="content-container"
+                                        faceplate-popper-content="" aria-label="Okgaroo details" position="bottom"
+                                        style="display: none;">
+                                        <slot name="content"></slot>
+                                    </div>
+                                </template>
+                                <faceplate-tracker source="post_credit_bar" action="click" noun="user_profile"
+                                    class="visible"><a rpl="" aria-label="Author: Okgaroo" class="author-name whitespace-nowrap inline-flex items-center text-neutral-content visited:text-neutral-content-weak focus-visible:-outline-offset-1 a
+  
+  
+  
+  no-visited
+  no-underline hover:no-underline
+  
+  cursor-pointer" href="https://www.reddit.com/user/Okgaroo/" aria-haspopup="dialog" aria-expanded="false"><span
+                                            class="whitespace-nowrap"
+                                            dir="auto">Okgaroo</span></a><!----></faceplate-tracker>
+                                <div slot="content" hidden="">
+                                    <faceplate-partial
+                                        src="/svc/shreddit/user-hover-card/Okgaroo?subredditName=RedditEng"
+                                        loading="programmatic"><template shadowrootmode="open"><!---->
+                                            <div>
+                                                <slot></slot>
+                                            </div>
+                                        </template>
+                                        <div class="w-5xl h-4xl flex items-center justify-center">
+                                            <faceplate-progress value="20" class="animate-spin"
+                                                status="incomplete"><template shadowrootmode="open"><!----> <svg
+                                                        viewBox="0 0 40 40" class="loader"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <circle class="bg" cx="20" cy="20" r="16"></circle>
+                                                        <circle cx="20" cy="20" stroke-linecap="round"
+                                                            class="track incomplete" r="16"
+                                                            stroke-dasharray="100.53096491487338 100.53096491487338"
+                                                            stroke-dashoffset="80.4247719318987"></circle>
+                                                    </svg>
+                                                    <div class="icon">
+                                                        <slot name="incomplete"></slot>
+                                                    </div>
+                                                </template></faceplate-progress>
+                                        </div>
+                                    </faceplate-partial>
+                                </div>
+                            </faceplate-hovercard>
+
+                        </div>
+                    </span>
+
+
+
+                    <shreddit-async-loader bundlename="distinguished_post_tags" class="contents"><template
+                            shadowrootmode="open"><!---->
+                            <slot></slot>
+                            <slot name="ready"></slot>
+                            <slot name="error"></slot>
+                        </template>
+                        <shreddit-distinguished-post-tags post-id="t3_1mbqto6"><template
+                                shadowrootmode="open"><!----></template>
+                        </shreddit-distinguished-post-tags>
+                    </shreddit-async-loader>
+
+
+
+                </div>
+            </div>
+        </span>
+        <span class="flex items-center ps-xs">
+
+
+            <shreddit-async-loader bundlename="status_icons"><template shadowrootmode="open"><!---->
+                    <slot></slot>
+                    <slot name="ready"></slot>
+                    <slot name="error"></slot>
+                </template>
+                <shreddit-status-icons class="nd:visible flex items-center gap-2xs isolate"
+                    thing-id="t3_1mbqto6"><template shadowrootmode="open"><!---->
+                        <slot></slot>
+                    </template>
+
+                    <rpl-tooltip class="nd:visible" appearance="inverted" trigger="hover focus"
+                        content="Locked post"><template shadowrootmode="open"><!----> <rpl-popper part="popper"
+                                exportparts="
+          popup:popper--popup,
+          arrow:popper--arrow
+        " flip="" shift="" arrow="" safe-area="" no-screen-reader="" class=" tooltip " placement="top" distance="4"
+                                skidding="0" strategy="absolute"><template shadowrootmode="open"><!---->
+                                    <slot name="anchor"></slot> <span part="safe-area" class=" popup-safe-area "></span>
+                                    <div part="popup" class=" popup popup--has-arrow " aria-hidden="true">
+                                        <slot></slot> <!--?lit$430296627$-->
+                                        <div part="arrow" class="popup--arrow" role="presentation"></div>
+                                    </div>
+                                </template>
+                                <slot slot="anchor" aria-describedby="tooltip"></slot>
+                                <div part="body" id="tooltip" class="tooltip-body" role="tooltip" aria-live="off"
+                                    hidden="">
+                                    <slot name="content"><!--?lit$430296627$-->Locked post</slot>
+                                    <slot name="shortcut"></slot>
+                                </div>
+                            </rpl-popper> </template><svg rpl="" aria-label="Locked post"
+                            class="hidden lock-status fill-[color:var(--color-identity-coins)] shrink-0 px-2xs"
+                            fill="currentColor" height="12" icon-name="lock-fill" viewBox="0 0 20 20" width="12"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15.993 8.168h-.429V6.61a5.572 5.572 0 00-5.566-5.566A5.572 5.572 0 004.432 6.61v1.558h-.429a2.005 2.005 0 00-2.005 2.005v3.692a5.054 5.054 0 005.054 5.054h5.892a5.054 5.054 0 005.054-5.054v-3.692a2.005 2.005 0 00-2.005-2.005zM10.998 15h-2v-3h2v3zm2.767-6.832H6.232V6.61A3.771 3.771 0 0110 2.844a3.77 3.77 0 013.767 3.766l-.001 1.558z">
+                            </path>
+                        </svg></rpl-tooltip>
+                    <rpl-tooltip class="nd:visible" appearance="inverted" trigger="hover focus"
+                        content="Stickied post"><template shadowrootmode="open"><!----> <rpl-popper part="popper"
+                                exportparts="
+          popup:popper--popup,
+          arrow:popper--arrow
+        " flip="" shift="" arrow="" safe-area="" no-screen-reader="" class=" tooltip " placement="top" distance="4"
+                                skidding="0" strategy="absolute"><template shadowrootmode="open"><!---->
+                                    <slot name="anchor"></slot> <span part="safe-area" class=" popup-safe-area "></span>
+                                    <div part="popup" class=" popup popup--has-arrow " aria-hidden="true">
+                                        <slot></slot> <!--?lit$430296627$-->
+                                        <div part="arrow" class="popup--arrow" role="presentation"></div>
+                                    </div>
+                                </template>
+                                <slot slot="anchor" aria-describedby="tooltip"></slot>
+                                <div part="body" id="tooltip" class="tooltip-body" role="tooltip" aria-live="off"
+                                    hidden="">
+                                    <slot name="content"><!--?lit$430296627$-->Stickied post</slot>
+                                    <slot name="shortcut"></slot>
+                                </div>
+                            </rpl-popper> </template><svg rpl="" aria-label="Stickied post"
+                            class="hidden stickied-status fill-[color:var(--color-identity-moderator)] shrink-0 px-2xs"
+                            fill="currentColor" height="12" icon-name="pin-fill" viewBox="0 0 20 20" width="12"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M18.163 6.191a4.194 4.194 0 00-1.237-2.986l-.167-.167a4.197 4.197 0 00-2.986-1.236 4.194 4.194 0 00-2.986 1.237L8.835 4.99a6.267 6.267 0 00-2.708.116 6.276 6.276 0 00-2.798 1.611.902.902 0 00-.001 1.274l3.724 3.723-4.955 4.955a.898.898 0 00.636 1.536c.23 0 .46-.088.636-.264l4.955-4.955 3.644 3.644a.897.897 0 001.273-.001 6.25 6.25 0 001.727-5.499l1.958-1.953a4.197 4.197 0 001.236-2.986h.001z">
+                            </path>
+                        </svg></rpl-tooltip>
+                    <rpl-tooltip class="nd:visible" appearance="inverted" trigger="hover focus"
+                        content="Archived post"><template shadowrootmode="open"><!----> <rpl-popper part="popper"
+                                exportparts="
+          popup:popper--popup,
+          arrow:popper--arrow
+        " flip="" shift="" arrow="" safe-area="" no-screen-reader="" class=" tooltip " placement="top" distance="4"
+                                skidding="0" strategy="absolute"><template shadowrootmode="open"><!---->
+                                    <slot name="anchor"></slot> <span part="safe-area" class=" popup-safe-area "></span>
+                                    <div part="popup" class=" popup popup--has-arrow " aria-hidden="true">
+                                        <slot></slot> <!--?lit$430296627$-->
+                                        <div part="arrow" class="popup--arrow" role="presentation"></div>
+                                    </div>
+                                </template>
+                                <slot slot="anchor" aria-describedby="tooltip"></slot>
+                                <div part="body" id="tooltip" class="tooltip-body" role="tooltip" aria-live="off"
+                                    hidden="">
+                                    <slot name="content"><!--?lit$430296627$-->Archived post</slot>
+                                    <slot name="shortcut"></slot>
+                                </div>
+                            </rpl-popper> </template><svg rpl="" aria-label="Archived post"
+                            class="hidden archived-status fill-[color:var(--color-identity-coins)] shrink-0 px-2xs"
+                            fill="currentColor" height="12" icon-name="archive-fill" viewBox="0 0 20 20" width="12"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15.7 1H4.3C2.48 1 1 2.48 1 4.3v2.76c0 .5.4.9.9.9H2v6.74C2 16.52 3.48 18 5.3 18h9.4c1.82 0 3.3-1.48 3.3-3.3V7.96h.1c.5 0 .9-.4.9-.9V4.3C19 2.48 17.52 1 15.7 1zM13 11.87H7v-1.8h6v1.8zm4.2-5.71H2.8V4.3c0-.83.67-1.5 1.5-1.5h11.4c.83 0 1.5.67 1.5 1.5v1.86z">
+                            </path>
+                        </svg></rpl-tooltip>
+                </shreddit-status-icons>
+            </shreddit-async-loader>
+
+
+
+            <faceplate-loader name="ShredditPostOverflowMenu_TJk9LY"
+                src="concat:DG4u9FeEp8,nNAD-NR_XO,Bqxu62ZxZE,DmDUdD0Xu0,DzDOrIoWBu,EUBEfFC2eV,BUcw0CzW1Z,CGj6-n7-mr,B3MmbiCG2_,Dr0wrYlNhu,Bya7_1ieOa,CGTMIGYAP9,D5wxYW5YXa,Bo5nDPVVRX,CDpxr9JxMe,BC2NIKe-mZ,bhny0bbFHW,BKNmV3X514,DrVSEP5KTy,DXR4XoJZw6,CIio_GDZZf,B-yNG3Y76N,ChJNHABdTp,D2r4YPIsyC,DAiT5YnDwy,BzfxAHCCRJ,Ce78QcburS,BUBy1QNsRk,CLE6kUpPkD,DHVUyjJmxo,BFMtkkr030,CiXy2o6iAa,DmRVYeyDyb,acWs4n6GtM,BAuCxnI3IN,DRlSsFRdKG,jZYweqnuXo,ByAxyyexuw,DdXnHfIuI1,CSqY4pkk_I,C88ob4f-C3,DuuEcszeXh,CZn9Pbn8yk,CUK4Ok2S6K,DXma808IhC,Cbas5FoKFS,XKfRsmAEcw,DZb-7l8YAj,CMnVEcbqIS,FQ1pAkfL_F,DadW2XPQ8i,Sk4hz6lYw9,BUjYFkK-VD,CuTwPysPbS,CWC8Xw7edx,DvhkHJ9uSd,iDw-XZThk9,Dkptqg0nCa,BAO7tL_sXn,BPwqmWnlJT,D6u07hFQ8Q,DuPXQ-dvFJ,DG6wc_CO5d,pL9YqJW9Xi,TiJfxCMBR4,CFDdxNGMjt,CO4tt3f3D3,DnRao8KtHA,C_2MYBGa54,7uv_43galM,wkXYZtSZWo,BwqRyx8nAQ,CBcVnCevW9,32SVV-WmPV,CRUr5mhMx9,C-Ys9TjOB3,C7i4TAoM5U,BUU2smj616,BNY9MZWBRn,CVYnoPX3ZO,QIknhS47TV,B_8Sl1i5yz,BxmAsOsKOy"
+                loading="eager" data-prefix="en-US/"
+                data-chunk-sizes="4511|7718|1823|8414|3397|2914|4813|10763|2490|2514|552249|20551|9972|58787|3570|45202|1816|786|1057|963|1518|1021|418|478|1046|607|537|4242|455|646|515|368|664|1522|983|2401|3318|1001|1029|517|664|559|864|676|1385|1582|576|775|573|460|603|649|850|719|906|1338|1060|3218|465|8200|2023|4836|17720|1853|2351|1572|3024|15140|514|638|824|5151|9226|2595|482|1896|7543|1483|376|900|142|998|516">
+
+                <script nonce="">
+                    SML.load([["DG4u9FeEp8", 4511], ["nNAD-NR_XO", 7718], ["Bqxu62ZxZE", 1823], ["DmDUdD0Xu0", 8414], ["DzDOrIoWBu", 3397], ["EUBEfFC2eV", 2914], ["BUcw0CzW1Z", 4813], ["CGj6-n7-mr", 10763], ["B3MmbiCG2_", 2490], ["Dr0wrYlNhu", 2514], ["Bya7_1ieOa", 552249], ["CGTMIGYAP9", 20551], ["D5wxYW5YXa", 9972], ["Bo5nDPVVRX", 58787], ["CDpxr9JxMe", 3570], ["BC2NIKe-mZ", 45202], ["bhny0bbFHW", 1816], ["BKNmV3X514", 786], ["DrVSEP5KTy", 1057], ["DXR4XoJZw6", 963], ["CIio_GDZZf", 1518], ["B-yNG3Y76N", 1021], ["ChJNHABdTp", 418], ["D2r4YPIsyC", 478], ["DAiT5YnDwy", 1046], ["BzfxAHCCRJ", 607], ["Ce78QcburS", 537], ["BUBy1QNsRk", 4242], ["CLE6kUpPkD", 455], ["DHVUyjJmxo", 646], ["BFMtkkr030", 515], ["CiXy2o6iAa", 368], ["DmRVYeyDyb", 664], ["acWs4n6GtM", 1522], ["BAuCxnI3IN", 983], ["DRlSsFRdKG", 2401], ["jZYweqnuXo", 3318], ["ByAxyyexuw", 1001], ["DdXnHfIuI1", 1029], ["CSqY4pkk_I", 517], ["C88ob4f-C3", 664], ["DuuEcszeXh", 559], ["CZn9Pbn8yk", 864], ["CUK4Ok2S6K", 676], ["DXma808IhC", 1385], ["Cbas5FoKFS", 1582], ["XKfRsmAEcw", 576], ["DZb-7l8YAj", 775], ["CMnVEcbqIS", 573], ["FQ1pAkfL_F", 460], ["DadW2XPQ8i", 603], ["Sk4hz6lYw9", 649], ["BUjYFkK-VD", 850], ["CuTwPysPbS", 719], ["CWC8Xw7edx", 906], ["DvhkHJ9uSd", 1338], ["iDw-XZThk9", 1060], ["Dkptqg0nCa", 3218], ["BAO7tL_sXn", 465], ["BPwqmWnlJT", 8200], ["D6u07hFQ8Q", 2023], ["DuPXQ-dvFJ", 4836], ["DG6wc_CO5d", 17720], ["pL9YqJW9Xi", 1853], ["TiJfxCMBR4", 2351], ["CFDdxNGMjt", 1572], ["CO4tt3f3D3", 3024], ["DnRao8KtHA", 15140], ["C_2MYBGa54", 514], ["7uv_43galM", 638], ["wkXYZtSZWo", 824], ["BwqRyx8nAQ", 5151], ["CBcVnCevW9", 9226], ["32SVV-WmPV", 2595], ["CRUr5mhMx9", 482], ["C-Ys9TjOB3", 1896], ["C7i4TAoM5U", 7543], ["BUU2smj616", 1483], ["BNY9MZWBRn", 376], ["CVYnoPX3ZO", 900], ["QIknhS47TV", 142], ["B_8Sl1i5yz", 998], ["BxmAsOsKOy", 516]], 'en-US/', 'auto');
+                </script>
+
+                <!---->
+            </faceplate-loader> <shreddit-post-overflow-menu class="group/overflow-menu" post-id="t3_1mbqto6"
+                author-id="t2_rqbm4x6pc" author-name="Okgaroo" subreddit-id="t5_49fkib"
+                subreddit-prefixed-name="r/RedditEng" post-type="multi_media" score="558" comment-count="40"
+                permalink="/r/RedditEng/comments/1mbqto6/modernizing_reddits_comment_backend_infrastructure/"
+                post-view-context="CommentsPage" is-desktop-viewport="" ama-state="" ama-starts-at="" ama-ends-at=""
+                should-render-follow-menu-item="" is-post-awardable="" award-count="2" award-id="award_helpful"
+                award-icon-url="https://www.redditstatic.com/marketplace-assets/v1/core/awards/helpful_v1_40.png"
+                rec-context-bottom-sheet-variant="" recommendation-context-json="{}" translation-state=""
+                data-faceplate-tracking-context="{&quot;post&quot;:{&quot;id&quot;:&quot;t3_1mbqto6&quot;,&quot;type&quot;:&quot;multi_media&quot;,&quot;score&quot;:558,&quot;number_comments&quot;:40},&quot;subreddit&quot;:{&quot;id&quot;:&quot;t5_49fkib&quot;}}"
+                premium-ad-overflow-variant="" item-state="UNMODERATED"><template shadowrootmode="open"><!---->
+                    <div data-post-click-location="overflow-button"> <!--?lit$430296627$--> <rpl-dropdown
+                            placement="bottom-end" class="group/dropdown"><template shadowrootmode="open"><!---->
+                                <rpl-popper part="popper" exportparts="
+          popup:popper--popup,
+          arrow:popper--arrow
+        " flip="" shift="" safe-area="" class="hovercard" placement="bottom-end" distance="4" skidding="0"
+                                    strategy="absolute"
+                                    style="--safe-area-top-left-x: 1144.5px; --safe-area-top-left-y: 120px; --safe-area-top-right-x: 1176.5px; --safe-area-top-right-y: 120px; --safe-area-bottom-left-x: 1054.640625px; --safe-area-bottom-left-y: 124px; --safe-area-bottom-right-x: 1176.5px; --safe-area-bottom-right-y: 124px;"><template
+                                        shadowrootmode="open"><!---->
+                                        <slot name="anchor"></slot> <span part="safe-area"
+                                            class="popup-safe-area"></span>
+                                        <div part="popup" class="popup" aria-hidden="false"
+                                            style="left: 610.141px; top: 52px;">
+                                            <slot></slot> <!--?lit$430296627$-->
+                                        </div>
+                                    </template>
+                                    <slot slot="anchor" aria-describedby="hovercard"></slot>
+                                    <div part="body" id="hovercard" class="hovercard-body" role="dialog" aria-live="off"
+                                        hidden="">
+                                        <slot name="content"></slot>
+                                    </div>
+                                </rpl-popper> </template>
+                            <slot></slot> <faceplate-menu slot="content"
+                                class="whitespace-nowrap max-h-[25.5rem] overflow-y-auto rounded-1 group-[:not(:defined)]/dropdown:hidden"><template
+                                    shadowrootmode="open"><!---->
+                                    <ul role="menu">
+                                        <slot></slot>
+                                    </ul>
+                                </template> <!--?lit$430296627$--> <!--?lit$430296627$--><!---->
+                                <li rpl="" class="relative list-none mt-0 " id="post-overflow-report"
+                                    role="presentation"> <!--?lit$430296627$--><!--?lit$430296627$-->
+                                    <div role="menuitem" tabindex="0"
+                                        class="flex justify-between relative px-md gap-xs text-secondary hover:text-secondary-hover active:bg-interactive-pressed hover:bg-neutral-background-hover hover:no-underline cursor-pointer  py-2xs  -outline-offset-1 "
+                                        style="padding-inline-end:16px"> <!--?lit$430296627$--> <span
+                                            class="flex items-center gap-xs min-w-0 shrink"> <!--?lit$430296627$-->
+                                            <span
+                                                class="flex shrink-0 items-center justify-center h-xl w-xl text-20 leading-4 ">
+                                                <!--?lit$430296627$--><svg rpl="" class="rpl-rtl-icon"
+                                                    fill="currentColor" height="20" icon-name="report"
+                                                    viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                                    <!--?lit$430296627$--><!--?lit$430296627$-->
+                                                    <path
+                                                        d="M15.21 7.5l2.56-3.86c.47-.7-.04-1.64-.88-1.64H5C3.03 2 1.59 3.87 2.1 5.78L4.04 13l1.37 5.08a.906.906 0 001.1.64.9.9 0 00.64-1.1l-1.24-4.61h10.98c.84 0 1.35-.94.88-1.64l-2.56-3.86V7.5zm-9.79 3.7L3.84 5.31c-.13-.5.07-.87.21-1.04.13-.18.44-.47.95-.47h10.5l-2.45 3.7 2.45 3.7H5.42z">
+                                                    </path><!--?-->
+                                                </svg> </span> <!--?lit$430296627$--> <span
+                                                class="flex flex-col justify-center min-w-0 shrink py-[0.375rem]"> <span
+                                                    class="text-body-2"><!--?lit$430296627$--><!--?lit$430296627$-->Report<!--?--></span>
+                                                <span
+                                                    class="text-caption-1 text-secondary-weak"><!--?lit$430296627$--></span>
+                                            </span> </span> <!--?lit$430296627$--><span
+                                            class="flex items-center shrink-0"> <span
+                                                class="flex items-center justify-center h-lg"><!--?lit$430296627$--></span>
+                                        </span> </div> <!--?lit$430296627$--><!--?-->
+                                </li><!---->
+                                <slot name="devvit-context-actions"></slot>
+                            </faceplate-menu>
+                        </rpl-dropdown> </div>
+                </template>
+                <button rpl="" aria-label="Open user actions" class="
+button-small px-[calc(var(--rem10)-var(--button-border-width,0px))]
+button-plain
+
+
+icon
+items-center justify-center
+button inline-flex " aria-haspopup="menu" aria-expanded="false">
+                    <span class="flex items-center justify-center">
+                        <span class="flex"><svg rpl="" fill="currentColor" height="16" icon-name="overflow-horizontal"
+                                viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16 11.75a1.75 1.75 0 11.001-3.501A1.75 1.75 0 0116 11.75zM11.75 10a1.75 1.75 0 10-3.501.001A1.75 1.75 0 0011.75 10zm-6 0a1.75 1.75 0 10-3.501.001A1.75 1.75 0 005.75 10z">
+                                </path>
+                            </svg></span>
+
+                    </span>
+
+                </button>
+
+
+                <div slot="devvit-context-actions" class="group-[:not(:defined)]/overflow-menu:hidden" role="menuitem">
+
+                </div>
+
+            </shreddit-post-overflow-menu>
+
+        </span>
+    </div>
+    <div slot="ssr-post-content-header"></div>
+    <div slot="related-community-recommendation">
+
+    </div>
+
+    <h1 id="post-title-t3_1mbqto6" slot="title"
+        class="text-neutral-content-strong m-0 font-semibold text-18 xs:text-24  mb-xs px-md xs:px-0 xs:mb-md  overflow-hidden"
+        aria-label="Post Title: Modernizing Reddit's Comment Backend Infrastructure"
+        aria-describedby="feed-post-credit-bar-t3_1mbqto6" dir="auto" style="text-rendering: optimizeLegibility;">
+        Modernizing Reddit's Comment Backend Infrastructure <faceplate-perfmark
+            name="first-post-meaningful-paint"></faceplate-perfmark>
+    </h1>
+
+    <shreddit-post-flair slot="post-flair" post-id="t3_1mbqto6"><template shadowrootmode="open"><!---->
+            <slot></slot>
+        </template></shreddit-post-flair>
+
+
+
+
+
+    <shreddit-post-text-body slot="text-body" post-id="t3_1mbqto6" view-context="CommentsPage" feed-view-type="cardView"
+        subreddit-prefixed-name="r/RedditEng" show-full-content=""><template shadowrootmode="open"><!---->
+            <slot name="text-body"></slot>
+        </template>
+        <div class="text-neutral-content" slot="text-body">
+            <div class="mb-sm  mb-xs px-md xs:px-0 overflow-hidden" data-post-click-location="text-body">
+                <div id="t3_1mbqto6-post-rtjson-content" class="md text-14-scalable pb-2xs [--emote-size:20px]"
+                    about="t3_1mbqto6" property="schema:articleBody" dir="auto">
+                    <p>
+                        <em>Written by Katie Shannon</em>
+                    </p>
+                    <h1 class="text-24-scalable xs:text-20-scalable">Background</h1>
+                    <p>
+                        At Reddit, we have four Core Models that power pretty much all use cases: Comments, Accounts,
+                        Posts and Subreddits. These four models were being served out of a legacy Python service, with
+                        ownership split across different teams. By 2024, the legacy Python service had a history of
+                        reliability and performance issues. Ownership and maintenance of this service had become more
+                        cumbersome for all involved teams. Due to this, we decided to move forward into modern and
+                        domain-specific Go microservices.&nbsp;
+                    </p>
+                    <p>
+                        In the second half of 2024, we moved forward with fully migrating the comment model first.
+                        Redditors love to share their opinions in comments, so naturally the comment model is our
+                        largest and highest write throughput model, making it a compelling candidate for our first
+                        migration.
+                    </p>
+                    <h1 class="text-24-scalable xs:text-20-scalable">How?</h1>
+                    <p>
+                        Migrating <strong>read endpoints</strong> is typically well understood and the solution is
+                        straightforward; we utilize <em>tap compare</em> testing. Tap compare is a way to ensure that a
+                        new endpoint is returning the same response as the old endpoint without risking user impact. We
+                        simply direct a small amount of traffic to the new endpoint, we get the response generated by
+                        the new endpoint, then call the old endpoint (from the new endpoint), and compare and log the
+                        responses. We still return the response from the old endpoint to the user to ensure no user
+                        impact, and have logs captured if the new endpoint would have returned something
+                        different.&nbsp; Easy AND safe!
+                    </p>
+                    <p>
+                        On the other hand, <strong>write endpoints</strong> are a much riskier migration.
+                    </p>
+                    <p>
+                        Why? Firstly, write endpoints almost always require writing data to datastores (caches,
+                        databases, etc). We have a few comment datastores to worry about, and we also generate CDC
+                        events when anything changes on any core model. We provide a 100% guarantee of delivery of these
+                        change events, which other critical services at Reddit consume, so we want to ensure there is no
+                        gap, delays or issues in our eventing generation. Essentially, instead of just returning some
+                        comment data like in our read migration, our comments infrastructure has three distinct data
+                        stores that are written to that factor into the migration:
+                    </p>
+                    <ul>
+                        <li>
+                            <p>
+                                Postgres – backend datastore which holds all of the comment data
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Memcached – our caching layer
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Redis – the event store used to fire off CDC Events
+                            </p>
+                        </li>
+                    </ul>
+                    <p>
+                        If we simply tap compare a write migration without any special considerations for the data
+                        stores, we could get into a state where the <em>new</em> implementation is writing invalid data,
+                        which fails to be read by the <em>old</em> implementation. To safely migrate Reddit’s most
+                        critical data, we could not rely on validating tap compare differences within our production
+                        data stores.
+                    </p>
+                    <p>
+                        Due to unique key restrictions on comment ids, duplicate writing to our data store is
+                        impossible. So, how does one validate a write to our data storage from two implementations
+                        without committing the same data twice? Thus, in order to properly test our new write endpoints,
+                        we set up three new sister datastores to be <em>only</em> used for tap compare testing, and
+                        <em>only</em> written to by our new Go microservice endpoints. That way, we could compare the
+                        data in our production data stores written by the old endpoint with the data in these sister
+                        data stores without the risk of the new endpoint corrupting or overwriting the production data
+                        stores.
+                    </p>
+                    <p>
+                        To verify these sister writes:
+                    </p>
+                    <ol>
+                        <li>
+                            <p>
+                                We directed a small percentage of traffic to the Go microservice
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                The Go microservice would call the legacy Python service to perform the production write
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                The Go microservice would then perform its own write to the sister data stores,
+                                completely isolated from the production data
+                            </p>
+                        </li>
+                    </ol>
+                    <figure class="rte-media">
+                        <a href="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-dgr6pkbj7off1.png?width=1200&amp;format=png&amp;auto=webp&amp;s=1f332e3c45588af4897bb19c7cc585d35f1902ea"
+                            title="Image from r/RedditEng - This diagram shows the dual write process for comments during tap comparison. "
+                            rel="noopener noreferrer ugc" target="_blank">
+                            <img src="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-dgr6pkbj7off1.png?width=1200&amp;format=png&amp;auto=webp&amp;s=1f332e3c45588af4897bb19c7cc585d35f1902ea"
+                                alt="r/RedditEng - This diagram shows the dual write process for comments during tap comparison. "
+                                class="mb-0 block w-fit my-0 mx-auto max-w-[100%] non-lightboxed-content" width="750"
+                                height="auto"
+                                srcset="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-dgr6pkbj7off1.png?width=320&amp;crop=smart&amp;auto=webp&amp;s=013f1a1b763ca4e04d893c7e28736d8c1aa53550 320w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-dgr6pkbj7off1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=0f6b34770b4a850cace89bf1a589703639e87326 640w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-dgr6pkbj7off1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;s=f55a53e544d06e0c58f9fa02b77b73c6cdd7edb3 1080w"
+                                sizes="(min-width: 1415px) 750px, (min-width: 768px) 50vw, 100vw"
+                                style="aspect-ratio:750/531.25" loading="eager">
+                        </a>
+                        <figcaption class="rte-media-caption">This diagram shows the dual write process for comments
+                            during tap comparison. </figcaption>
+                    </figure>
+                    <p>
+                        After all writes were done, we had to verify them. We read from the three production data stores
+                        that the legacy Python service wrote to, and compared them to what we wrote to the three sister
+                        data stores in the Go microservice.
+                    </p>
+                    <p>
+                        Additionally, to combat some serialization issues we ran into early in the migration process,
+                        where Python services couldn’t deserialize data written by Go services, we verified all the tap
+                        comparisons in comment CDC event consumers in the legacy Python service.
+                    </p>
+                    <figure class="rte-media">
+                        <a href="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-6vn5th7n7off1.png?width=1200&amp;format=png&amp;auto=webp&amp;s=4c2d021ccc947e082bb3d6e8d0a9c9b38cdc2470"
+                            title="Image from r/RedditEng - This diagram shows the verification process of the tap compare logs that takes place after the dual write."
+                            rel="noopener noreferrer ugc" target="_blank">
+                            <img src="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-6vn5th7n7off1.png?width=1200&amp;format=png&amp;auto=webp&amp;s=4c2d021ccc947e082bb3d6e8d0a9c9b38cdc2470"
+                                alt="r/RedditEng - This diagram shows the verification process of the tap compare logs that takes place after the dual write."
+                                class="mb-0 block w-fit my-0 mx-auto max-w-[100%] non-lightboxed-content" width="750"
+                                height="auto"
+                                srcset="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-6vn5th7n7off1.png?width=320&amp;crop=smart&amp;auto=webp&amp;s=91b82462d4baa4ec658f835c1292f98dd8bdf951 320w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-6vn5th7n7off1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=333331ac4015e7f91722e2a028552e6de721a3c8 640w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-6vn5th7n7off1.png?width=1080&amp;crop=smart&amp;auto=webp&amp;s=81a21933d698aa04b8942f65de22fbbe57f18d8b 1080w"
+                                sizes="(min-width: 1415px) 750px, (min-width: 768px) 50vw, 100vw"
+                                style="aspect-ratio:750/750" loading="eager">
+                        </a>
+                        <figcaption class="rte-media-caption">This diagram shows the verification process of the tap
+                            compare logs that takes place after the dual write.</figcaption>
+                    </figure>
+                    <p>
+                        In summary, we migrated 3 writes endpoints, that each wrote to 3 different datastores, and
+                        verified that data across 2 different services, resulting in 18 different tap compares running
+                        that required extra time to validate and fix.
+                    </p>
+                    <h1 class="text-24-scalable xs:text-20-scalable">Outcome and Improvements</h1>
+                    <p>
+                        We are excited to say that after a seamless migration, with no disruption to Reddit users, all
+                        comment endpoints are now being served out of our new Golang microservice. This marks a
+                        significant milestone as comments are now the first core model fully served outside of our
+                        legacy monolithic system!
+                    </p>
+                    <p>
+                        The main goal of this project was to get the critical comments read/write paths off the legacy
+                        Python service to a modern Go microservice while maintaining performance and availability
+                        parity. However, the migration from Python to Go yielded a happy side effect where we ended up
+                        halving the latency for the three write endpoints that were migrated. You can see this in these
+                        p99 graphs, (old legacy Python service endpoints are green, and new endpoints in the new Go
+                        microservice are yellow).
+                    </p>
+                    <p>
+                        <strong>Create Comment Endpoint</strong>
+                    </p>
+                    <figure class="rte-media">
+                        <a href="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-rdza1u468off1.png?width=1001&amp;format=png&amp;auto=webp&amp;s=9c6554270d105e8ce0d367577a886d37e8e581db"
+                            title="Image from r/RedditEng - This graph shows the 99th percentile latency for the endpoint called when creating new comments. The green represents calls handled by the Python monolith, whereas the yellow…"
+                            rel="noopener noreferrer ugc" target="_blank">
+                            <img src="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-rdza1u468off1.png?width=1001&amp;format=png&amp;auto=webp&amp;s=9c6554270d105e8ce0d367577a886d37e8e581db"
+                                alt="r/RedditEng - This graph shows the 99th percentile latency for the endpoint called when creating new comments. The green represents calls handled by the Python monolith, whereas the yellow represents calls from the Go microservice."
+                                class="mb-0 block w-fit my-0 mx-auto max-w-[100%] non-lightboxed-content" width="750"
+                                height="auto"
+                                srcset="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-rdza1u468off1.png?width=320&amp;crop=smart&amp;auto=webp&amp;s=2bf7542edb2c4a08cf331a45fc588e57d83a0600 320w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-rdza1u468off1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=ba42de8aae1e3293aca20e47b71a9d4700153801 640w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-rdza1u468off1.png?width=1001&amp;format=png&amp;auto=webp&amp;s=9c6554270d105e8ce0d367577a886d37e8e581db 1001w"
+                                sizes="(min-width: 1415px) 750px, (min-width: 768px) 50vw, 100vw"
+                                style="aspect-ratio:750/227.02297702297705" loading="eager">
+                        </a>
+                        <figcaption class="rte-media-caption">This graph shows the 99th percentile latency for the
+                            endpoint called when creating new comments. The green represents calls handled by the Python
+                            monolith, whereas the yellow represents calls from the Go microservice.</figcaption>
+                    </figure>
+                    <p>
+                        <strong>Update Comment Endpoint</strong>
+                    </p>
+                    <figure class="rte-media">
+                        <a href="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-zlnrxirc8off1.png?width=1002&amp;format=png&amp;auto=webp&amp;s=df644e414cc2d5077864c08447478b9be4c6ed22"
+                            title="Image from r/RedditEng - This graph shows the 99th percentile latency for the endpoint called when updating comments. The green represents calls handled by the Python monolith, whereas the yellow…"
+                            rel="noopener noreferrer ugc" target="_blank">
+                            <img src="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-zlnrxirc8off1.png?width=1002&amp;format=png&amp;auto=webp&amp;s=df644e414cc2d5077864c08447478b9be4c6ed22"
+                                alt="r/RedditEng - This graph shows the 99th percentile latency for the endpoint called when updating comments. The green represents calls handled by the Python monolith, whereas the yellow represents calls from the Go microservice."
+                                class="mb-0 block w-fit my-0 mx-auto max-w-[100%] non-lightboxed-content" width="750"
+                                height="auto"
+                                srcset="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-zlnrxirc8off1.png?width=320&amp;crop=smart&amp;auto=webp&amp;s=34eb59ed00042a3a68e93e41665dcca419ba6dc5 320w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-zlnrxirc8off1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=bc454ac755e6a12f2df2748c91e79920d7380a63 640w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-zlnrxirc8off1.png?width=1002&amp;format=png&amp;auto=webp&amp;s=df644e414cc2d5077864c08447478b9be4c6ed22 1002w"
+                                sizes="(min-width: 1415px) 750px, (min-width: 768px) 50vw, 100vw"
+                                style="aspect-ratio:750/225.2994011976048" loading="eager">
+                        </a>
+                        <figcaption class="rte-media-caption">This graph shows the 99th percentile latency for the
+                            endpoint called when updating comments. The green represents calls handled by the Python
+                            monolith, whereas the yellow represents calls from the Go microservice.</figcaption>
+                    </figure>
+                    <p>
+                        <strong>Increment Comment Properties Endpoint</strong>
+                    </p>
+                    <figure class="rte-media">
+                        <a href="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-fcha75tg8off1.png?width=1001&amp;format=png&amp;auto=webp&amp;s=0c33f44f2294d84a82b16fe4f230d37072b251ea"
+                            title="Image from r/RedditEng - This graph shows the 99th percentile latency for the endpoint called when incrementing properties of a comment, such as upvoting. The green represents calls handled by the…"
+                            rel="noopener noreferrer ugc" target="_blank">
+                            <img src="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-fcha75tg8off1.png?width=1001&amp;format=png&amp;auto=webp&amp;s=0c33f44f2294d84a82b16fe4f230d37072b251ea"
+                                alt="r/RedditEng - This graph shows the 99th percentile latency for the endpoint called when incrementing properties of a comment, such as upvoting. The green represents calls handled by the Python monolith, whereas the yellow represents calls from the Go microservice."
+                                class="mb-0 block w-fit my-0 mx-auto max-w-[100%] non-lightboxed-content" width="750"
+                                height="auto"
+                                srcset="https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-fcha75tg8off1.png?width=320&amp;crop=smart&amp;auto=webp&amp;s=e43286cce473e0ccca85702122ac391c55073251 320w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-fcha75tg8off1.png?width=640&amp;crop=smart&amp;auto=webp&amp;s=fe3f6d082a9187337e2dd1a3a6cc1fc9493b8614 640w, https://preview.redd.it/modernizing-reddits-comment-backend-infrastructure-v0-fcha75tg8off1.png?width=1001&amp;format=png&amp;auto=webp&amp;s=0c33f44f2294d84a82b16fe4f230d37072b251ea 1001w"
+                                sizes="(min-width: 1415px) 750px, (min-width: 768px) 50vw, 100vw"
+                                style="aspect-ratio:750/227.02297702297705" loading="eager">
+                        </a>
+                        <figcaption class="rte-media-caption">This graph shows the 99th percentile latency for the
+                            endpoint called when incrementing properties of a comment, such as upvoting. The green
+                            represents calls handled by the Python monolith, whereas the yellow represents calls from
+                            the Go microservice.</figcaption>
+                    </figure>
+                    <p>
+                        These graphs are capped at a .1 x axis (100ms) so the difference is visible, but the legacy
+                        Python service occasionally had very large latency spikes up to 15s.
+                    </p>
+                    <h1 class="text-24-scalable xs:text-20-scalable">What We Learned</h1>
+                    <p>
+                        The comment writes migration, while successful, provided valuable insights for future core model
+                        migrations. We came across a few interesting issues.
+                    </p>
+                    <p>
+                        <strong>Differences in Go vs. Python</strong>
+                    </p>
+                    <p>
+                        Migrating endpoints between two languages is inherently more difficult than, say, a Python to
+                        Python migration. Understanding the differences in the languages and how to generate the same
+                        responses at the Thrift and GRPC level was an expected difficulty of the project. What was
+                        unexpected was the underlying differences in how Go and Python communicate with the database
+                        layer. Python uses an ORM to make querying and writing to our Postgres store a bit simpler. We
+                        don’t use an ORM for our Golang services at Reddit, and some unknown underlying optimizations on
+                        Python’s ORM resulted in some database pressure when we started ramping up our new Go endpoint.
+                        Luckily, we caught on early and were able to optimize our queries in Go. Moving forward with
+                        future migrations, we’ve ensured to monitor our database queries and resource utilization.
+                    </p>
+                    <p>
+                        <strong>Race Conditions on Comment Updates</strong>
+                    </p>
+                    <p>
+                        Tap compare was a great tool to ensure we didn’t introduce differences with the new endpoint.
+                        However, we were getting “false mismatches” in our tap compare logic. We spent a long time
+                        trying to understand these differences, and it ended up being because of a race condition.
+                    </p>
+                    <p>
+                        Let’s say we’re comparing an update comment call which updates the comment body text to “hello”.
+                        This update call gets routed to the new Go service. The Go service updates the comment in the
+                        sister data stores, then calls the Python service to handle the real update. It then compares
+                        what the Python service wrote to the production database, and what Go wrote to the sister
+                        database. However, the production database's comment body is now “hello again”. This caused a
+                        mismatch in our tap compare logs which didn’t make much sense! We realized this was because the
+                        comment that was updated had been updated again in the milliseconds it took to call the Python
+                        service and make the database calls.&nbsp;
+                    </p>
+                    <p>
+                        This made things complicated when trying to ensure that there were no differences between the
+                        old and the new endpoint. Was there a difference because of a bug in the implementation between
+                        the old and new endpoint, or was it simply an unluckily timed race condition? Moving forward, we
+                        will be versioning our database updates to ensure we’re only comparing relevant model updates.
+                    </p>
+                    <p>
+                        <strong>Tests</strong>
+                    </p>
+                    <p>
+                        A lot of this migration was spent manually poring over tap compare logs in production. Moving
+                        forward with future core model migrations, we’ve decided to invest more time having more
+                        comprehensive local testing before moving forward with tap compares in hopes that we’ll catch
+                        more differences in endpoints and conversions early on. This isn’t to say there weren’t
+                        extensive tests in place for the comments migration, but we’ll be taking it to an entirely new
+                        level for our next migration.
+                    </p>
+                    <p>
+                        Each comment is composed of many internal metadata fields to represent different states a
+                        comment can be in – resulting in thousands of possible combinations in the way a comment can be
+                        represented. We had local testing covering common comment use cases, but relied on our tap
+                        compare logs to surface differences in niche edge cases. With future core model migrations, we
+                        plan to delve into these edge cases by using real production data to inform our local tests,
+                        before even starting to tap compare in production.
+                    </p>
+                    <h1 class="text-24-scalable xs:text-20-scalable">What’s Next?</h1>
+                    <p>
+                        The goal of Reddit’s infrastructure organization is to deliver reliability and performance with
+                        a modern tech stack, and that involves completely getting rid of our legacy Python monoliths. As
+                        of today, two of our four core models (Comments and Accounts) have been fully migrated from our
+                        Python monolith and in progress are the migrations for Posts and Subreddits. Soon, all core
+                        models will be modernized to ensure your <a rpl="" class=" a
+  
+  
+  
+  
+  hover:underline
+  
+  cursor-pointer" href="/r/AmItheAsshole/">r/AmItheAsshole</a> judgements and cute cat pictures are delivered more
+                        reliably and faster!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </shreddit-post-text-body>
+
+
+
+    <div class="flex justify-end px-md xs:px-0">
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <faceplate-dropdown-menu class="share-dropdown-menu relative connected" position="bottom-start"
+        slot="ssr-share-button"><template shadowrootmode="open"><!---->
+            <slot id="trigger" aria-describedby="menu" faceplate-popper-trigger="" aria-controls="menu"></slot>
+            <article id="menu" faceplate-popper-content="" style="pointer-events: none; display: none;">
+                <slot name="menu"></slot>
+            </article>
+        </template>
+        <button rpl="" aria-label="Share" class="button border-sm font-semibold text-label-2 button-secondary  inline-flex items-center
+       px-sm py-xs
+      " style="height: var(--size-button-sm-h);" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="flex items-center">
+                <span class="flex text-body-1 me-2xs"><svg rpl="" aria-hidden="true" class="icon-share rpl-rtl-icon"
+                        fill="currentColor" height="16" icon-name="share" viewBox="0 0 20 20" width="16"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12.8 17.524l6.89-6.887a.9.9 0 000-1.273L12.8 2.477a1.64 1.64 0 00-1.782-.349 1.64 1.64 0 00-1.014 1.518v2.593C4.054 6.728 1.192 12.075 1 17.376a1.353 1.353 0 00.862 1.32 1.35 1.35 0 001.531-.364l.334-.381c1.705-1.944 3.323-3.791 6.277-4.103v2.509c0 .667.398 1.262 1.014 1.518a1.638 1.638 0 001.783-.349v-.002zm-.994-1.548V12h-.9c-3.969 0-6.162 2.1-8.001 4.161.514-4.011 2.823-8.16 8-8.16h.9V4.024L17.784 10l-5.977 5.976z">
+                        </path>
+                    </svg></span>
+                <span> <span class="hidden s:block">Share</span> </span>
+            </span>
+
+        </button>
+    </faceplate-dropdown-menu>
+
+</shreddit-post>
